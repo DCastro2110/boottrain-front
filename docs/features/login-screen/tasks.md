@@ -6,11 +6,11 @@ This document lists the numbered subtasks for implementing the login screen feat
 
 ## Subtask List
 
-1. [Create login page route and server component](./1.md)
-2. [Create GoogleAuthButton client component](./2.md)
-3. [Implement Google OAuth sign-in handler](./3.md)
-4. [Add login page styling with Tailwind](./4.md)
-5. [Add error handling and loading states](./5.md)
+1. [x] (done - committed) Create login page route and server component
+2. [ ] (in progress) Create GoogleAuthButton client component
+3. [ ] Implement Google OAuth sign-in handler
+4. [ ] Add login page styling with Tailwind
+5. [ ] Add error handling and loading states
 
 ## Implementation Order
 
