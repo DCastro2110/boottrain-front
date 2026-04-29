@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import { signIn } from "better-auth/react";
-import { useState } from "react";
+import { useState } from 'react';
+
+import { authClient } from '@/lib/auth-client';
 
 export function GoogleAuthButton() {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,17 +13,25 @@ export function GoogleAuthButton() {
     setError(null);
 
     try {
-      await signIn("google");
+      await authClient.signIn.social({
+        provider: 'google',
+        callbackURL: '/',
+      });
     } catch (err) {
       const message =
-        err instanceof Error ? err.message : "Algo deu errado. Tente novamente.";
+        err instanceof Error
+          ? err.message
+          : 'Algo deu errado. Tente novamente.';
 
-      if (message.includes("network") || message.includes("fetch")) {
-        setError("Erro de conexão. Verifique sua internet.");
-      } else if (message.includes("cancelled") || message.includes("canceled")) {
-        setError("Login cancelado pelo usuário.");
+      if (message.includes('network') || message.includes('fetch')) {
+        setError('Erro de conexão. Verifique sua internet.');
+      } else if (
+        message.includes('cancelled') ||
+        message.includes('canceled')
+      ) {
+        setError('Login cancelado pelo usuário.');
       } else {
-        setError("Algo deu errado. Tente novamente.");
+        setError('Algo deu errado. Tente novamente.');
       }
 
       setIsLoading(false);
@@ -35,7 +44,7 @@ export function GoogleAuthButton() {
         onClick={handleSignIn}
         disabled={isLoading}
         className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
-        aria-describedby={error ? "google-auth-error" : undefined}
+        aria-describedby={error ? 'google-auth-error' : undefined}
       >
         {/* Google Icon */}
         <svg
@@ -64,7 +73,7 @@ export function GoogleAuthButton() {
           />
         </svg>
 
-        <span>{isLoading ? "Entrando..." : "Fazer login com Google"}</span>
+        <span>{isLoading ? 'Entrando...' : 'Fazer login com Google'}</span>
       </button>
 
       {error && (
