@@ -7,17 +7,22 @@ This document lists the numbered subtasks for implementing the login screen feat
 ## Subtask List
 
 1. [x] (done - committed) Create login page route and server component
-2. [ ] (in progress) Create GoogleAuthButton client component
-3. [ ] Implement Google OAuth sign-in handler
-4. [ ] Add login page styling with Tailwind
-5. [ ] Add error handling and loading states
+2. [x] (done - committed) Create GoogleAuthButton client component
+3. [x] (done - committed) Implement Google OAuth sign-in handler
+4. [x] (done - committed) Add login page styling with Tailwind
+5. [x] (done - committed) Add error handling and loading states
 
-## Implementation Order
+## Implementation Summary
 
-1. **Tasks 1-2**: Create the page structure and interactive button component
-2. **Task 3**: Integrate better-auth for Google OAuth
-3. **Task 4**: Apply styling matching the Pencil design
-4. **Task 5**: Polish with error handling and loading states
+All tasks have been completed:
+
+| Task | Description | Status |
+|------|-------------|--------|
+| 1 | Create login page route `/login` | ✅ Committed |
+| 2 | Create GoogleAuthButton client component | ✅ Committed |
+| 3 | Implement Google OAuth via authClient.signIn.social() | ✅ Committed |
+| 4 | Apply styling matching Pencil design (blue #2b54ff card, 402px width) | ✅ Committed |
+| 5 | Loading ("Entrando...") and error states in Portuguese | ✅ Committed |
 
 ## Critical Dependencies
 
