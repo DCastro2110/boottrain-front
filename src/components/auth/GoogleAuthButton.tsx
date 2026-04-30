@@ -43,7 +43,7 @@ export function GoogleAuthButton() {
       <button
         onClick={handleSignIn}
         disabled={isLoading}
-        className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+        className="inline-flex font-primary items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
         aria-describedby={error ? 'google-auth-error' : undefined}
       >
         {/* Google Icon */}
