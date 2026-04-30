@@ -3,6 +3,8 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter_Tight } from 'next/font/google';
 
+import { ToastProvider } from '@/components/ui/toast';
+
 const interTight = Inter_Tight({
   variable: '--font-inter-tight',
   subsets: ['latin'],
@@ -20,8 +22,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={` ${interTight.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-heading">{children}</body>
+    <html lang="en" className={`${interTight.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col font-heading">
+        <ToastProvider>{children}</ToastProvider>
+      </body>
     </html>
   );
 }

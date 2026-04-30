@@ -2,15 +2,17 @@
 
 import { useState } from 'react';
 
+import { useToast } from '@/components/ui/toast';
 import { authClient } from '@/lib/auth-client';
 
 export function GoogleAuthButton() {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { addToast } = useToast();
 
   const handleSignIn = async () => {
+    if (isLoading) return;
+
     setIsLoading(true);
-    setError(null);
 
     try {
       await authClient.signIn.social({
@@ -18,22 +20,25 @@ export function GoogleAuthButton() {
         callbackURL: '/',
       });
     } catch (err) {
-      const message =
-        err instanceof Error
-          ? err.message
-          : 'Algo deu errado. Tente novamente.';
-
-      if (message.includes('network') || message.includes('fetch')) {
-        setError('Erro de conexão. Verifique sua internet.');
-      } else if (
-        message.includes('cancelled') ||
-        message.includes('canceled')
-      ) {
-        setError('Login cancelado pelo usuário.');
-      } else {
-        setError('Algo deu errado. Tente novamente.');
+      if (err instanceof Error) {
+        if (
+          err.message.includes('network') ||
+          err.message.includes('fetch')
+        ) {
+          addToast('Erro de conexão. Verifique sua internet.', 'error');
+          setIsLoading(false);
+          return;
+        }
+        if (
+          err.message.includes('cancelled') ||
+          err.message.includes('canceled')
+        ) {
+          addToast('Login cancelado pelo usuário.', 'error');
+          setIsLoading(false);
+          return;
+        }
       }
-
+      addToast('Algo deu errado. Tente novamente.', 'error');
       setIsLoading(false);
     }
   };
@@ -43,10 +48,8 @@ export function GoogleAuthButton() {
       <button
         onClick={handleSignIn}
         disabled={isLoading}
-        className="inline-flex font-primary items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
-        aria-describedby={error ? 'google-auth-error' : undefined}
+        className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
       >
-        {/* Google Icon */}
         <svg
           width="18"
           height="18"
@@ -75,16 +78,6 @@ export function GoogleAuthButton() {
 
         <span>{isLoading ? 'Entrando...' : 'Fazer login com Google'}</span>
       </button>
-
-      {error && (
-        <p
-          id="google-auth-error"
-          className="text-sm text-red-500 text-center"
-          role="alert"
-        >
-          {error}
-        </p>
-      )}
     </div>
   );
 }
