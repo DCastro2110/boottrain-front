@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${interTight.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-heading">
+      <body className="min-h-full flex flex-col font-primary">
         <ToastProvider>{children}</ToastProvider>
       </body>
     </html>
