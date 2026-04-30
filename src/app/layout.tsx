@@ -1,16 +1,12 @@
 import './globals.css';
 
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Inter_Tight } from 'next/font/google';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const interTight = Inter_Tight({
+  variable: '--font-inter-tight',
   subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+  weight: ['400', '600'],
 });
 
 export const metadata: Metadata = {
@@ -24,11 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en" className={` ${interTight.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col font-heading">{children}</body>
     </html>
   );
 }
