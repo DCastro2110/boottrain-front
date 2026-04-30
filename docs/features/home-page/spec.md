@@ -119,8 +119,9 @@ The Home Page serves as the main dashboard for users after logging into the BooT
 
 ### Architecture
 
-1. **Page** (`src/app/page.tsx`): Server component that fetches data and passes to children
-2. **Data Fetcher** (inline or separate module): Fetches `getHomeInfo` directly (server-side)
+1. **Data Fetch Functions** (in `src/data-fetch/`):
+   - `getHomeInfo.ts` - Server-side function to call `getHomeInfo` API
+2. **Page** (`src/app/page.tsx`): Server component that imports from data-fetch and passes to children
 3. **Components** (in `src/components/`):
    - `ConsistencyBoard.tsx` - Receives data via props, renders 7 day squares
    - `WorkoutCard.tsx` - Receives workout data via props
@@ -132,8 +133,8 @@ The Home Page serves as the main dashboard for users after logging into the BooT
 ### Data Flow
 
 ```
-Page (server component - fetches data)
-  └── getHomeInfo (orval generated API - server-side call)
+Page (server component)
+  └── src/data-fetch/getHomeInfo.ts (server-side API call)
   └── Banner (static UI - no data needed)
   └── ConsistencyBoard (receives consistency data via props)
   └── TreinoDeHoje (receives todayWorkoutDay via props)
