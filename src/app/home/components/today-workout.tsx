@@ -44,8 +44,13 @@ export function TodayWorkout({ todayWorkoutDay }: ITodayWorkoutProps) {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
-        <span className="text-base font-semibold sm:text-lg">Treino de Hoje</span>
-        <Link href="/treinos" className="text-xs text-blue-500 sm:text-sm">
+        <span className="text-base font-semibold sm:text-lg">
+          Treino de Hoje
+        </span>
+        <Link
+          href="/treinos"
+          className="text-xs text-blue-500 sm:text-sm"
+        >
           Ver treinos
         </Link>
       </div>

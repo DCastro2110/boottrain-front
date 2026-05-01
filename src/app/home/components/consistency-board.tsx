@@ -32,13 +32,39 @@ const DAY_ABBREVIATIONS: Record<ConsistencyDay["day"], string> = {
 const STATUS_COLORS = {
   completed: "bg-blue-500",
   not_completed: "bg-blue-100",
-  missed: "bg-neutral-100",
+  missed: "bg-neutral-200",
+  future: "bg-neutral-100",
+};
+
+const DAY_ORDER: Record<ConsistencyDay["day"], number> = {
+  SUNDAY: 0,
+  MONDAY: 1,
+  TUESDAY: 2,
+  WEDNESDAY: 3,
+  THURSDAY: 4,
+  FRIDAY: 5,
+  SATURDAY: 6,
 };
 
 export function ConsistencyBoard({
   consistency,
   fireSequence,
 }: IConsistencyBoardProps) {
+  const today = new Date();
+  const currentDayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, etc.
+
+  const isFutureDay = (day: ConsistencyDay["day"]): boolean => {
+    const dayIndex = DAY_ORDER[day];
+    return dayIndex > currentDayOfWeek;
+  };
+
+  const getStatusColor = (dayInfo: ConsistencyDay): string => {
+    if (isFutureDay(dayInfo.day)) {
+      return STATUS_COLORS.future;
+    }
+    return STATUS_COLORS[dayInfo.status];
+  };
+
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
@@ -51,7 +77,7 @@ export function ConsistencyBoard({
           {consistency.map((dayInfo) => (
             <div
               key={dayInfo.day}
-              className={`flex h-9 w-9 sm:h-12 sm:w-12 items-center justify-center rounded-lg ${STATUS_COLORS[dayInfo.status]}`}
+              className={`flex h-9 w-9 sm:h-12 sm:w-12 items-center justify-center rounded-lg ${getStatusColor(dayInfo)}`}
             >
               <span className="text-[10px] font-medium sm:text-xs">
                 {DAY_ABBREVIATIONS[dayInfo.day]}
@@ -62,7 +88,9 @@ export function ConsistencyBoard({
 
         <div className="flex items-center gap-1.5 rounded-xl bg-orange-100 px-3 py-1.5 sm:gap-2 sm:px-4 sm:py-2">
           <Flame className="h-4 w-4 text-orange-500 sm:h-5 sm:w-5" />
-          <span className="text-sm font-semibold sm:text-base">{fireSequence}</span>
+          <span className="text-sm font-semibold sm:text-base">
+            {fireSequence}
+          </span>
         </div>
       </div>
     </div>
