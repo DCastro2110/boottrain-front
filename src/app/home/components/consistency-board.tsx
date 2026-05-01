@@ -20,31 +20,31 @@ interface IConsistencyBoardProps {
 }
 
 const DAY_ABBREVIATIONS: Record<ConsistencyDay["day"], string> = {
-  SUNDAY: "DOM",
-  MONDAY: "SEG",
-  TUESDAY: "TER",
-  WEDNESDAY: "QUA",
-  THURSDAY: "QUI",
-  FRIDAY: "SEX",
-  SATURDAY: "SÁB",
+  SUNDAY: "D",
+  MONDAY: "S",
+  TUESDAY: "T",
+  WEDNESDAY: "Q",
+  THURSDAY: "Q",
+  FRIDAY: "S",
+  SATURDAY: "S",
 };
 
 const STATUS_COLORS = {
-  completed: "bg-blue-500",
-  not_completed: "bg-blue-100",
-  missed: "bg-neutral-200",
-  future: "bg-neutral-100",
+  completed: "bg-[#2b54ff]",
+  not_completed: "bg-transparent border border-[#f1f1f1]",
+  missed: "bg-[#d5dffe]",
+  future: "bg-transparent border border-[#f1f1f1]",
 };
 
-const DAY_ORDER: Record<ConsistencyDay["day"], number> = {
-  SUNDAY: 0,
-  MONDAY: 1,
-  TUESDAY: 2,
-  WEDNESDAY: 3,
-  THURSDAY: 4,
-  FRIDAY: 5,
-  SATURDAY: 6,
-};
+const DAY_ORDER: ConsistencyDay["day"][] = [
+  "SUNDAY",
+  "MONDAY",
+  "TUESDAY",
+  "WEDNESDAY",
+  "THURSDAY",
+  "FRIDAY",
+  "SATURDAY",
+];
 
 export function ConsistencyBoard({
   consistency,
@@ -54,8 +54,42 @@ export function ConsistencyBoard({
   const currentDayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, etc.
 
   const isFutureDay = (day: ConsistencyDay["day"]): boolean => {
-    const dayIndex = DAY_ORDER[day];
-    return dayIndex > currentDayOfWeek;
+    // Corrected logic for Seg-Dom order
+    const dayJsIndex = [0, 1, 2, 3, 4, 5, 6].find(
+      (i) =>
+        [
+          "SUNDAY",
+          "MONDAY",
+          "TUESDAY",
+          "WEDNESDAY",
+          "THURSDAY",
+          "FRIDAY",
+          "SATURDAY",
+        ][i] === day
+    );
+
+    // Simplest is to compare with JS getDay()
+    // But we need to handle Sunday as 7 if we are in a 1-7 (Seg-Dom) cycle
+    const normalizedCurrent = currentDayOfWeek === 0 ? 7 : currentDayOfWeek;
+    const normalizedDay = dayJsIndex === 0 ? 7 : dayJsIndex!;
+
+    return normalizedDay > normalizedCurrent;
+  };
+
+  const isToday = (day: ConsistencyDay["day"]): boolean => {
+    const dayJsIndex = [0, 1, 2, 3, 4, 5, 6].find(
+      (i) =>
+        [
+          "SUNDAY",
+          "MONDAY",
+          "TUESDAY",
+          "WEDNESDAY",
+          "THURSDAY",
+          "FRIDAY",
+          "SATURDAY",
+        ][i] === day
+    );
+    return dayJsIndex === currentDayOfWeek;
   };
 
   const getStatusColor = (dayInfo: ConsistencyDay): string => {
@@ -65,30 +99,40 @@ export function ConsistencyBoard({
     return STATUS_COLORS[dayInfo.status];
   };
 
+  const sortedConsistency = [...consistency].sort(
+    (a, b) => DAY_ORDER.indexOf(a.day) - DAY_ORDER.indexOf(b.day)
+  );
+
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
-        <span className="text-base font-semibold sm:text-lg">Consistência</span>
-        <span className="text-xs text-blue-500 sm:text-sm">Ver histórico</span>
+        <span className="text-[18px] font-semibold text-black">
+          Consistência
+        </span>
+        <span className="text-[12px] text-[#2b54ff]">Ver histórico</span>
       </div>
 
-      <div className="flex flex-col items-center gap-3 sm:flex-row">
-        <div className="flex gap-1.5 sm:gap-3 rounded-xl bg-neutral-100 p-2.5 sm:p-5">
-          {consistency.map((dayInfo) => (
-            <div
-              key={dayInfo.day}
-              className={`flex h-9 w-9 sm:h-12 sm:w-12 items-center justify-center rounded-lg ${getStatusColor(dayInfo)}`}
-            >
-              <span className="text-[10px] font-medium sm:text-xs">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex flex-1 gap-3 rounded-xl border border-[#f1f1f1] p-5">
+          {sortedConsistency.map((dayInfo) => (
+            <div key={dayInfo.day} className="flex flex-col items-center gap-1.5">
+              <div
+                className={`h-5 w-5 rounded-[6px] ${getStatusColor(dayInfo)} ${
+                  isToday(dayInfo.day)
+                    ? "ring-2 ring-[#2b54ff] ring-offset-0"
+                    : ""
+                }`}
+              />
+              <span className="text-[12px] font-normal text-[#656565]">
                 {DAY_ABBREVIATIONS[dayInfo.day]}
               </span>
             </div>
           ))}
         </div>
 
-        <div className="flex items-center gap-1.5 rounded-xl bg-orange-100 px-3 py-1.5 sm:gap-2 sm:px-4 sm:py-2">
-          <Flame className="h-4 w-4 text-orange-500 sm:h-5 sm:w-5" />
-          <span className="text-sm font-semibold sm:text-base">
+        <div className="flex h-full items-center gap-2 rounded-xl bg-[#f0610014] px-5 py-2">
+          <Flame className="h-5 w-5 fill-[#f06100] text-[#f06100]" />
+          <span className="text-[16px] font-semibold text-black">
             {fireSequence}
           </span>
         </div>
