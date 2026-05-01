@@ -17,14 +17,14 @@ export function GoogleAuthButton() {
     try {
       await authClient.signIn.social({
         provider: 'google',
-        callbackURL: '/',
+        callbackURL: `${process.env.NEXT_PUBLIC_BASE_URL}/`,
+        additionalData: {
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        },
       });
     } catch (err) {
       if (err instanceof Error) {
-        if (
-          err.message.includes('network') ||
-          err.message.includes('fetch')
-        ) {
+        if (err.message.includes('network') || err.message.includes('fetch')) {
           addToast('Erro de conexão. Verifique sua internet.', 'error');
           setIsLoading(false);
           return;
