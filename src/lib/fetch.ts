@@ -10,7 +10,7 @@ const getHeaders = async (headers?: HeadersInit) => {
 };
 
 const getUrl = (url: string) => {
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || '';
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL!;
   const requestUrl = new URL(url, baseUrl);
   return requestUrl.toString();
 };
