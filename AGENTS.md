@@ -52,3 +52,9 @@ Client uses `better-auth/react` with `NEXT_PUBLIC_APP_URL` env var (default: `ht
 - Components used in only one place should be defined in the same file as their usage (e.g. `src/app/login/page.tsx` can contain a `LoginForm` component if it's only used there).
 - **AVOID** repetitive components; if you find yourself copy-pasting a component, move it to `src/components` and reuse it.
 - **ALWAYS** prefer server components unless you need client-side interactivity; use `use client` directive only when necessary. If possible, keep components as server components and use client components only for interactive parts (e.g. a `LoginButton` client component inside a `LoginPage` server component).
+  -Components used in only one page should be placed **together with their page folder** (e.g., `src/app/home/components/SomeComponent.tsx` for a component only used in `src/app/home/page.tsx`).
+- Shared components that are used in multiple places go in `src/components/`.
+
+## Naming Conventions
+
+- All component file names must use **kebab-case** and be in **English**.

@@ -10,6 +10,7 @@
 ## Directory Structure & Path Aliases
 
 Follow strict boundaries based on aliases and directory purposes:
+
 - `src/app` (`@/*`): Next.js app directory for routing (pages, layouts). App-specific components should be colocated here.
 - `src/components` (`@/components`): Shared business or domain-specific components used in more than one place.
 - `src/ui` (`@/ui`): Reusable generic design-system primitives and shadcn/ui components.

@@ -29,16 +29,16 @@
             {
               "type": "image",
               "enabled": true,
-              "url": "",
-              "mode": "stretch"
+              "url": "images/generated-1777503443263.png",
+              "mode": "fill"
             },
             {
               "type": "gradient",
               "gradientType": "linear",
               "enabled": true,
-              "rotation": -248.5683675968569,
+              "rotation": -248,
               "size": {
-                "height": 0.849600602118011
+                "height": 1
               },
               "colors": [
                 {
@@ -46,14 +46,10 @@
                   "position": 0
                 },
                 {
-                  "color": "#000000ff",
+                  "color": "#00000099",
                   "position": 1
                 }
-              ],
-              "center": {
-                "x": 0.3422665110207012,
-                "y": 0.7093520558614443
-              }
+              ]
             }
           ],
           "cornerRadius": [
@@ -647,12 +643,15 @@
               "name": "restaurant img",
               "width": "fill_container",
               "height": 200,
-              "fill": {
-                "type": "image",
-                "enabled": true,
-                "url": "",
-                "mode": "fill"
-              },
+              "fill": [
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "images/generated-1777503437305.png",
+                  "mode": "fill"
+                },
+                "#00000066"
+              ],
               "cornerRadius": 12,
               "stroke": {
                 "align": "inside",
@@ -1235,17 +1234,16 @@
             {
               "type": "image",
               "enabled": true,
-              "url": "",
+              "url": "images/generated-1777503450876.png",
               "mode": "fill"
             },
             {
               "type": "gradient",
               "gradientType": "linear",
               "enabled": true,
-              "opacity": 0.800000011920929,
-              "rotation": -244.8729351228451,
+              "rotation": -244,
               "size": {
-                "height": 1.3299955377019343
+                "height": 1
               },
               "colors": [
                 {
@@ -1253,14 +1251,10 @@
                   "position": 0
                 },
                 {
-                  "color": "#000000ff",
+                  "color": "#000000cc",
                   "position": 1
                 }
-              ],
-              "center": {
-                "x": 0.5000000007247951,
-                "y": 0.50000009489069
-              }
+              ]
             }
           ],
           "cornerRadius": [
@@ -1515,12 +1509,15 @@
               "name": "restaurant img",
               "width": "fill_container",
               "height": 200,
-              "fill": {
-                "type": "image",
-                "enabled": true,
-                "url": "",
-                "mode": "fill"
-              },
+              "fill": [
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "images/generated-1777503436418.png",
+                  "mode": "fill"
+                },
+                "#00000066"
+              ],
               "cornerRadius": 12,
               "stroke": {
                 "align": "inside",
@@ -1790,12 +1787,15 @@
               "name": "restaurant img",
               "width": "fill_container",
               "height": 200,
-              "fill": {
-                "type": "image",
-                "enabled": true,
-                "url": "",
-                "mode": "fill"
-              },
+              "fill": [
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "images/generated-1777503442629.png",
+                  "mode": "fill"
+                },
+                "#00000066"
+              ],
               "cornerRadius": 12,
               "stroke": {
                 "align": "inside",
@@ -3535,12 +3535,15 @@
               "name": "banner",
               "clip": true,
               "width": "fill_container",
-              "fill": {
-                "type": "image",
-                "enabled": true,
-                "url": "",
-                "mode": "fill"
-              },
+              "fill": [
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "images/generated-1777503497497.png",
+                  "mode": "fill"
+                },
+                "#00000066"
+              ],
               "cornerRadius": 12,
               "stroke": {
                 "align": "inside",
@@ -6324,12 +6327,15 @@
               "name": "banner",
               "clip": true,
               "width": "fill_container",
-              "fill": {
-                "type": "image",
-                "enabled": true,
-                "url": "",
-                "mode": "fill"
-              },
+              "fill": [
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "images/generated-1777503491583.png",
+                  "mode": "fill"
+                },
+                "#00000066"
+              ],
               "cornerRadius": 12,
               "stroke": {
                 "align": "inside",
@@ -9279,13 +9285,13 @@
               "clip": true,
               "width": "fill_container(353)",
               "fill": [
-                "#000000ff",
                 {
                   "type": "image",
                   "enabled": true,
-                  "url": "",
-                  "mode": "stretch"
-                }
+                  "url": "images/generated-1777503495326.png",
+                  "mode": "fill"
+                },
+                "#00000066"
               ],
               "cornerRadius": 12,
               "stroke": {
@@ -10357,12 +10363,15 @@
               "name": "restaurant img",
               "width": "fill_container",
               "height": 200,
-              "fill": {
-                "type": "image",
-                "enabled": true,
-                "url": "",
-                "mode": "fill"
-              },
+              "fill": [
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "images/generated-1777503439072.png",
+                  "mode": "fill"
+                },
+                "#00000066"
+              ],
               "cornerRadius": 12,
               "stroke": {
                 "align": "inside",
@@ -12432,12 +12441,15 @@
               "name": "restaurant img",
               "width": "fill_container",
               "height": 200,
-              "fill": {
-                "type": "image",
-                "enabled": true,
-                "url": "",
-                "mode": "fill"
-              },
+              "fill": [
+                {
+                  "type": "image",
+                  "enabled": true,
+                  "url": "images/generated-1777503438738.png",
+                  "mode": "fill"
+                },
+                "#00000066"
+              ],
               "cornerRadius": 12,
               "stroke": {
                 "align": "inside",
@@ -14412,16 +14424,16 @@
                 {
                   "type": "image",
                   "enabled": true,
-                  "url": "",
-                  "mode": "stretch"
+                  "url": "images/generated-1777503436445.png",
+                  "mode": "fill"
                 },
                 {
                   "type": "gradient",
                   "gradientType": "linear",
                   "enabled": true,
-                  "rotation": -248.5683675968569,
+                  "rotation": -248,
                   "size": {
-                    "height": 0.849600602118011
+                    "height": 1
                   },
                   "colors": [
                     {
@@ -14429,14 +14441,10 @@
                       "position": 0
                     },
                     {
-                      "color": "#000000ff",
+                      "color": "#00000099",
                       "position": 1
                     }
-                  ],
-                  "center": {
-                    "x": 0.3422665110207012,
-                    "y": 0.7093520558614443
-                  }
+                  ]
                 }
               ],
               "cornerRadius": [
@@ -15030,12 +15038,15 @@
                   "name": "restaurant img",
                   "width": "fill_container",
                   "height": 200,
-                  "fill": {
-                    "type": "image",
-                    "enabled": true,
-                    "url": "",
-                    "mode": "fill"
-                  },
+                  "fill": [
+                    {
+                      "type": "image",
+                      "enabled": true,
+                      "url": "images/generated-1777503488739.png",
+                      "mode": "fill"
+                    },
+                    "#00000066"
+                  ],
                   "cornerRadius": 12,
                   "stroke": {
                     "align": "inside",
@@ -16977,12 +16988,15 @@
                   "name": "restaurant img",
                   "width": "fill_container",
                   "height": 200,
-                  "fill": {
-                    "type": "image",
-                    "enabled": true,
-                    "url": "",
-                    "mode": "fill"
-                  },
+                  "fill": [
+                    {
+                      "type": "image",
+                      "enabled": true,
+                      "url": "images/generated-1777503492196.png",
+                      "mode": "fill"
+                    },
+                    "#00000066"
+                  ],
                   "cornerRadius": 12,
                   "stroke": {
                     "align": "inside",
@@ -19803,10 +19817,10 @@
                             {
                               "type": "image",
                               "enabled": true,
-                              "url": "",
+                              "url": "images/generated-1777503499763.png",
                               "mode": "fill"
                             },
-                            "#00000033"
+                            "#00000066"
                           ],
                           "cornerRadius": 12,
                           "stroke": {
@@ -19890,13 +19904,13 @@
       "width": 402,
       "height": 801,
       "fill": [
-        "#000000ff",
         {
           "type": "image",
           "enabled": true,
-          "url": "",
-          "mode": "stretch"
-        }
+          "url": "images/generated-1777503497664.png",
+          "mode": "fill"
+        },
+        "#000000aa"
       ],
       "stroke": {
         "align": "inside",
