@@ -145,13 +145,13 @@ Page (server component)
 
 ### Component Details
 
-| Component          | Type   | Props                                                        | Purpose                      |
-| ------------------ | ------ | ------------------------------------------------------------ | ---------------------------- |
-| `ConsistencyBoard` | Client | `consistency: WeekConsistencyItem[]`, `fireSequence: number` | Renders 7 day squares        |
-| `WorkoutCard`      | Client | `workout: TodayWorkoutDay`                                   | Displays workout info        |
-| `RestDayCard`      | Client | `weekday: string`                                            | Shows rest day               |
-| `TreinoDeHoje`     | Client | `todayWorkoutDay: TodayWorkoutDay \| null`                   | Conditionally renders cards   |
-| `Navbar`           | Server | none                                                         | Bottom navigation links      |
+| Component          | Type   | Props                                                        | Purpose                     |
+| ------------------ | ------ | ------------------------------------------------------------ | --------------------------- |
+| `ConsistencyBoard` | Client | `consistency: WeekConsistencyItem[]`, `fireSequence: number` | Renders 7 day squares       |
+| `WorkoutCard`      | Client | `workout: TodayWorkoutDay`                                   | Displays workout info       |
+| `RestDayCard`      | Client | `weekday: string`                                            | Shows rest day              |
+| `TreinoDeHoje`     | Client | `todayWorkoutDay: TodayWorkoutDay \| null`                   | Conditionally renders cards |
+| `Navbar`           | Server | none                                                         | Bottom navigation links     |
 
 ### API Response Shape
 
