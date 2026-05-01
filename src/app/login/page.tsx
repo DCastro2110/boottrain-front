@@ -1,6 +1,20 @@
-import { GoogleAuthButton } from '@/components/auth/GoogleAuthButton';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
 
-export default function LoginPage() {
+import { GoogleAuthButton } from '@/components/auth/GoogleAuthButton';
+import { authClient } from '@/lib/auth-client';
+
+export default async function LoginPage() {
+  const session = await authClient.getSession({
+    fetchOptions: {
+      headers: await headers(),
+    },
+  });
+
+  if (session) {
+    redirect('/');
+  }
+
   return (
     <main className="min-h-screen flex flex-col">
       {/* Background with overlay */}
