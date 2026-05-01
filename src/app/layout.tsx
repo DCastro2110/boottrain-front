@@ -1,14 +1,21 @@
 import './globals.css';
 
 import type { Metadata } from 'next';
-import { Inter_Tight } from 'next/font/google';
+import { Anton, Inter_Tight } from 'next/font/google';
 
 import { ToastProvider } from '@/components/ui/toast';
+import { UserProvider } from '@/context/user-provider';
 
 const interTight = Inter_Tight({
   variable: '--font-inter-tight',
   subsets: ['latin'],
   weight: ['400', '600'],
+});
+
+const anton = Anton({
+  variable: '--font-anton',
+  subsets: ['latin'],
+  weight: ['400'],
 });
 
 export const metadata: Metadata = {
@@ -22,9 +29,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${interTight.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${interTight.variable} ${anton.variable} h-full antialiased`}
+    >
       <body className="min-h-full flex flex-col font-primary">
-        <ToastProvider>{children}</ToastProvider>
+        <ToastProvider>
+          <UserProvider>{children}</UserProvider>
+        </ToastProvider>
       </body>
     </html>
   );

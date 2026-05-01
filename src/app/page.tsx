@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import { getHomeInfoData } from '@/data-fetch/get-home-info';
 import { authClient } from '@/lib/auth-client';
 
+import { Banner } from './home/components/banner';
 import { ConsistencyBoard } from './home/components/consistency-board';
 import { Navbar } from './home/components/navbar';
 import { TodayWorkout } from './home/components/today-workout';
@@ -17,7 +18,7 @@ export default async function HomePage() {
     },
   });
 
-  if (!session) {
+  if (!session.data) {
     redirect('/login');
   }
 
@@ -34,35 +35,12 @@ export default async function HomePage() {
   return (
     <div className="relative min-h-screen bg-white pb-24">
       {/* Banner Section */}
-      <div className="relative flex h-72 min-h-[250px] max-h-[320px] w-full flex-col justify-between rounded-b-[20px] bg-cover bg-center p-4 sm:p-5">
-        {/* Background image placeholder - would use actual image URL from user profile */}
-        <div className="absolute inset-0 rounded-b-[20px] bg-gradient-to-b from-transparent to-black/60" />
-
-        {/* Header with logo */}
-        <div className="relative flex items-center justify-between">
-          <span className="font-anton text-xl text-white sm:text-2xl">
-            Fit.ai
-          </span>
-          <div className="flex items-center gap-2 rounded-full bg-blue-500 px-3 py-1.5 sm:px-4 sm:py-2">
-            <span className="text-xs font-medium text-white sm:text-sm">
-              Premium
-            </span>
-          </div>
-        </div>
-
-        {/* Greeting */}
-        <div className="relative flex flex-col gap-1">
-          <h1 className="text-xl font-semibold text-white sm:text-2xl">
-            Olá, Paulo
-          </h1>
-          <p className="text-sm text-white/70">Bora treinar hoje?</p>
-        </div>
-      </div>
+      <Banner userName={session.data?.user?.name || 'Paulo'} />
 
       {/* Main Content */}
-      <main className="flex flex-col gap-4 p-4 sm:gap-6 sm:p-5">
+      <main className="flex flex-col">
         {/* Consistency Section */}
-        <div className="rounded-lg bg-neutral-50 p-4 sm:p-5">
+        <div className="px-5 pt-5">
           <ConsistencyBoard
             consistency={homeData.weekConsistency}
             fireSequence={homeData.fireSequence}
@@ -70,7 +48,9 @@ export default async function HomePage() {
         </div>
 
         {/* Treino de Hoje Section */}
-        <TodayWorkout todayWorkoutDay={homeData.todayWorkoutDay} />
+        <div className="p-5">
+          <TodayWorkout todayWorkoutDay={homeData.todayWorkoutDay} />
+        </div>
       </main>
 
       {/* Bottom Navbar */}

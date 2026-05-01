@@ -1,5 +1,5 @@
-import type { GetHomeInfo200 } from "@/lib/api/booTrainAPI";
-import { getHomeInfo } from "@/lib/api/booTrainAPI";
+import type { GetHomeInfo200 } from "@/lib/api/boo-train-api";
+import { getHomeInfo } from "@/lib/api/boo-train-api";
 
 export async function getHomeInfoData(): Promise<GetHomeInfo200 | null> {
   try {
