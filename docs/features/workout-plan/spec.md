@@ -1,13 +1,14 @@
 # Especificação Técnica: Workout Plan
 
 ## Overview
-A funcionalidade de Workout Plan permite que os usuários visualizem os detalhes de um plano de treino específico, incluindo a listagem de dias de treino. A navegação permite acessar os detalhes de cada dia de treino. A funcionalidade também inclui a reestruturação das rotas existentes para português, saindo do inglês usado anteriormente.
+A funcionalidade de Workout Plan permite que os usuários visualizem os detalhes de um plano de treino específico, incluindo a listagem de dias de treino. A navegação permite acessar os detalhes de cada dia de treino. A funcionalidade também inclui a reestruturação das rotas existentes para português, saindo do inglês usado anteriormente, e a adoção da convenção `_components` para diretórios de componentes locais.
 
 ## Goals & Scope
 - **O que será feito:**
   - Reestruturação das rotas de inglês (`/workout-plan/...`) para português (`/planos/...`).
   - Criação da página principal do plano em `/planos/[planId]`.
   - Migração da página de detalhes do dia para `/planos/[planId]/dias/[dayId]`.
+  - Migração de componentes locais de `components/` para `_components/` na nova estrutura.
   - Integração com a API para buscar os detalhes do plano específico.
   - Reutilização do componente de card da home page.
   - Implementação de Header e design responsivo baseado nos Node IDs fornecidos (`qW6Lu` para header e página, `a3W9s` para cards).
@@ -20,6 +21,7 @@ A funcionalidade de Workout Plan permite que os usuários visualizem os detalhes
 - **Rotas (Next.js App Router):**
   - `/planos/[planId]/page.tsx`: Lista os dias do plano e exibe cabeçalho.
   - `/planos/[planId]/dias/[dayId]/page.tsx`: Detalhes de um dia específico (rota migrada).
+  - Qualquer diretório de componentes local a uma rota DEVE ser nomeado como `_components` (ex: `/planos/[planId]/dias/[dayId]/_components`).
 - **Data Fetching:** Utilização da função `getWorkoutPlanWorkoutPlanId` da API gerada pelo Orval.
 - **Autenticação e Autorização:**
   - Uso do hook `useUser` para verificar o estado de autenticação.

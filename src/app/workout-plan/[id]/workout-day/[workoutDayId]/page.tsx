@@ -9,6 +9,7 @@ import { getWorkoutDayData } from '@/data-fetch/get-workout-day';
 import { authClient } from '@/lib/auth-client';
 
 import { Hero } from './components/hero';
+import { ExerciseList } from './components/exercise-list';
 
 export const dynamic = 'force-dynamic';
 
@@ -125,13 +126,13 @@ export default async function WorkoutDayPage({
             workoutDayId={workoutDayId}
           />
 
-          {/* Exercise List Placeholder (HnlKL) */}
+          {/* Exercise List (HnlKL) */}
           <div className="flex flex-col gap-3">
             <h2 className="text-lg font-semibold text-gray-900">Exercícios</h2>
             <p className="text-sm text-gray-500">
               {workoutDay.workoutExercises?.length || 0} exercícios planejados
             </p>
-            {/* Exercises will be added in Task 4 */}
+            <ExerciseList exercises={workoutDay.workoutExercises || []} />
           </div>
         </section>
       </main>
