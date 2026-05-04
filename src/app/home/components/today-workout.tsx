@@ -57,7 +57,11 @@ export function TodayWorkout({ todayWorkoutDay }: ITodayWorkoutProps) {
       </div>
 
       {todayWorkoutDay ? (
-        <WorkoutCard workout={todayWorkoutDay} />
+        <WorkoutCard
+          planId={todayWorkoutDay.workoutPlanId}
+          dayId={todayWorkoutDay.workoutDayId}
+          workout={todayWorkoutDay}
+        />
       ) : (
         <RestDayCard weekday={getWeekdayName(new Date().toISOString())} />
       )}
