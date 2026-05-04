@@ -1,3 +1,4 @@
+import { ChevronLeft } from 'lucide-react';
 import { headers } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -6,6 +7,8 @@ import { Navbar } from '@/app/home/components/navbar';
 import { Button } from '@/components/ui/button';
 import { getWorkoutDayData } from '@/data-fetch/get-workout-day';
 import { authClient } from '@/lib/auth-client';
+
+import { Hero } from './components/hero';
 
 export const dynamic = 'force-dynamic';
 
@@ -106,18 +109,21 @@ export default async function WorkoutDayPage({
       <main className="flex w-full max-w-[393px] flex-col items-center">
         {/* twsDH - Section */}
         <section className="flex w-full flex-col gap-5 p-5">
-          {/* Header Placeholder (U4XXZx) */}
+          {/* Header (U4XXZx) */}
           <div className="flex h-14 items-center justify-between">
-            <h1 className="text-xl font-bold text-gray-900">Treino do Dia</h1>
+            <Link href="/" className="flex h-10 w-10 items-center justify-center rounded-xl bg-gray-50 text-gray-900 transition-colors hover:bg-gray-100">
+              <ChevronLeft className="h-6 w-6" />
+            </Link>
+            <h1 className="text-xl font-bold text-gray-900">Treino de Hoje</h1>
+            <div className="h-10 w-10" /> {/* Spacer */}
           </div>
 
-          {/* Banner Placeholder (q3wGFH) */}
-          <div className="relative h-[200px] w-full overflow-hidden rounded-xl bg-gray-100">
-             {/* Info will be added in Task 3 */}
-             <div className="flex h-full items-center justify-center text-gray-400">
-                Banner Area
-             </div>
-          </div>
+          {/* Hero Section (q3wGFH) */}
+          <Hero
+            workoutDay={workoutDay}
+            workoutPlanId={id}
+            workoutDayId={workoutDayId}
+          />
 
           {/* Exercise List Placeholder (HnlKL) */}
           <div className="flex flex-col gap-3">
@@ -135,3 +141,4 @@ export default async function WorkoutDayPage({
     </div>
   );
 }
+

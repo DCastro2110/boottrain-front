@@ -5,6 +5,7 @@ import { Anton, Inter_Tight } from 'next/font/google';
 
 import { ToastProvider } from '@/components/ui/toast';
 import { UserProvider } from '@/context/user-provider';
+import { QueryProvider } from '@/providers/query-provider';
 
 const interTight = Inter_Tight({
   variable: '--font-inter-tight',
@@ -35,7 +36,9 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-primary">
         <ToastProvider>
-          <UserProvider>{children}</UserProvider>
+          <QueryProvider>
+            <UserProvider>{children}</UserProvider>
+          </QueryProvider>
         </ToastProvider>
       </body>
     </html>

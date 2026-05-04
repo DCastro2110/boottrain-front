@@ -1,0 +1,120 @@
+'use client';
+
+import { useMutation } from '@tanstack/react-query';
+import { Calendar, Dumbbell, Loader2, Timer } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+
+import { useToast } from '@/components/ui/toast';
+import {
+  type GetWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayId200,
+  postWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayIdSessions,
+} from '@/lib/api/boo-train-api';
+
+interface HeroProps {
+  workoutDay: GetWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayId200;
+  workoutPlanId: string;
+  workoutDayId: string;
+}
+
+function formatDuration(seconds: number): string {
+  const minutes = Math.round(seconds / 60);
+  return `${minutes}min`;
+}
+
+function getFullWeekdayName(weekDay: string): string {
+  const weekdays: Record<string, string> = {
+    SUNDAY: 'DOMINGO',
+    MONDAY: 'SEGUNDA',
+    TUESDAY: 'TERÇA',
+    WEDNESDAY: 'QUARTA',
+    THURSDAY: 'QUINTA',
+    FRIDAY: 'SEXTA',
+    SATURDAY: 'SÁBADO',
+  };
+  return weekdays[weekDay] || weekDay;
+}
+
+export function Hero({ workoutDay, workoutPlanId, workoutDayId }: HeroProps) {
+  const { addToast } = useToast();
+  const router = useRouter();
+
+  const mutation = useMutation({
+    mutationFn: () =>
+      postWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayIdSessions(
+        workoutPlanId,
+        workoutDayId
+      ),
+    onSuccess: () => {
+      addToast('Treino iniciado!', 'success');
+      router.refresh();
+    },
+    onError: () => {
+      addToast('Erro ao iniciar treino', 'error');
+    },
+  });
+
+  const weekdayName = getFullWeekdayName(workoutDay.weekDay);
+  const isSessionActive = !!workoutDay.workoutSessionId;
+
+  return (
+    <div
+      className="relative flex h-[200px] w-full flex-col justify-between rounded-xl bg-cover bg-center p-5"
+      style={{
+        backgroundImage: workoutDay.coverImageUrl
+          ? `linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url(${workoutDay.coverImageUrl})`
+          : 'linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2))',
+      }}
+    >
+      <div className="absolute inset-0 rounded-xl bg-black/40" />
+
+      <div className="relative flex items-center gap-2">
+        <span className="flex items-center gap-1 rounded-full bg-white/20 px-2.5 py-1.5 text-[12px] font-semibold text-white backdrop-blur-md">
+          <Calendar className="h-3.5 w-3.5" />
+          <span>{weekdayName}</span>
+        </span>
+      </div>
+
+      <div className="relative flex items-end justify-between gap-2">
+        <div className="flex flex-col gap-2">
+          <h3 className="text-2xl font-semibold text-white">
+            {workoutDay.name}
+          </h3>
+
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1 text-[12px] text-white/70">
+              <Timer className="h-3.5 w-3.5" />
+              <span>
+                {formatDuration(workoutDay.estimatedDurationInSeconds)}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-1 text-[12px] text-white/70">
+              <Dumbbell className="h-3.5 w-3.5" />
+              <span>
+                {workoutDay.numberOfExercises}{' '}
+                {workoutDay.numberOfExercises === 1
+                  ? 'exercício'
+                  : 'exercícios'}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {!isSessionActive ? (
+          <button
+            onClick={() => mutation.mutate()}
+            disabled={mutation.isPending}
+            className="h-10 rounded-full bg-[#2b54ff] px-4 text-sm font-semibold text-white disabled:opacity-50 flex items-center gap-2"
+          >
+            {mutation.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
+            Iniciar Treino
+          </button>
+        ) : (
+          <div className="h-10 flex items-center px-4 rounded-full bg-green-500 text-sm font-semibold text-white">
+            Em andamento
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
