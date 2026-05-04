@@ -10,6 +10,7 @@ import { authClient } from '@/lib/auth-client';
 
 import { Hero } from './components/hero';
 import { ExerciseList } from './components/exercise-list';
+import { FinishButton } from './components/finish-button';
 
 export const dynamic = 'force-dynamic';
 
@@ -133,6 +134,15 @@ export default async function WorkoutDayPage({
               {workoutDay.workoutExercises?.length || 0} exercícios planejados
             </p>
             <ExerciseList exercises={workoutDay.workoutExercises || []} />
+          </div>
+
+          {/* Finish Action (gYCIU) */}
+          <div className="mt-4">
+            <FinishButton
+              workoutPlanId={id}
+              workoutDayId={workoutDayId}
+              sessionId={workoutDay.workoutSessionId}
+            />
           </div>
         </section>
       </main>
