@@ -57,4 +57,4 @@ Client uses `better-auth/react` with `NEXT_PUBLIC_APP_URL` env var (default: `ht
 
 ## Naming Conventions
 
-- All component file names must use **kebab-case** and be in **English**.
+- All file names must use **kebab-case** and be in **English**.
