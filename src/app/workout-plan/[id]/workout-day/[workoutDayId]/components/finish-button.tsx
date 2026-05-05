@@ -89,12 +89,8 @@ export function FinishButton({
                 />
               </svg>
             </div>
-            <h2 className="mb-2 text-xl font-bold text-gray-900">
-              Parabéns!
-            </h2>
-            <p className="mb-8 text-gray-600">
-              Você concluiu o treino do dia!
-            </p>
+            <h2 className="mb-2 text-xl font-bold text-gray-900">Parabéns!</h2>
+            <p className="mb-8 text-gray-600">Você concluiu o treino do dia!</p>
             <Button
               render={<Link href="/" />}
               nativeButton={false}

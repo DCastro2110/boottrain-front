@@ -4,7 +4,11 @@ import { type ReactNode, useEffect, useState } from 'react';
 
 import { authClient } from '@/lib/auth-client';
 
-import { type IUser, type IUserContextValue, UserContext } from './user-context';
+import {
+  type IUser,
+  type IUserContextValue,
+  UserContext,
+} from './user-context';
 
 interface IUserProviderProps {
   children: ReactNode;

@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useCallback, useContext,useState } from 'react';
+import { createContext, useCallback, useContext, useState } from 'react';
 
 interface Toast {
   id: string;
@@ -37,7 +37,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
       setToasts((prev) => [...prev, { id, message, type }]);
       setTimeout(() => removeToast(id), 5000);
     },
-    [removeToast]
+    [removeToast],
   );
 
   return (

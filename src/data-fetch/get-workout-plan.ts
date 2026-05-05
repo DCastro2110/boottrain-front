@@ -4,7 +4,10 @@ import type {
   GetWorkoutPlanWorkoutPlanId200,
   getWorkoutPlanWorkoutPlanIdResponse,
 } from '@/lib/api/boo-train-api';
-import { getWorkoutPlan, getWorkoutPlanWorkoutPlanId } from '@/lib/api/boo-train-api';
+import {
+  getWorkoutPlan,
+  getWorkoutPlanWorkoutPlanId,
+} from '@/lib/api/boo-train-api';
 
 export async function getWorkoutPlanData(): Promise<
   GetWorkoutPlan200Item[] | null
