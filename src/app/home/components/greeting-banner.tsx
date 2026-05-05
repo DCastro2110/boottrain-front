@@ -1,6 +1,6 @@
 'use client';
 
-import { useUser } from '@/hooks/useUser';
+import { useUser } from '@/hooks/use-user';
 
 export function GreetingBanner() {
   const user = useUser();
