@@ -1,9 +1,11 @@
 # Especificação Técnica: Workout Plan
 
 ## Overview
+
 A funcionalidade de Workout Plan permite que os usuários visualizem os detalhes de um plano de treino específico, incluindo a listagem de dias de treino. A navegação permite acessar os detalhes de cada dia de treino. A funcionalidade também inclui a reestruturação das rotas existentes para português, saindo do inglês usado anteriormente, e a adoção da convenção `_components` para diretórios de componentes locais.
 
 ## Goals & Scope
+
 - **O que será feito:**
   - Reestruturação das rotas de inglês (`/workout-plan/...`) para português (`/planos/...`).
   - Criação da página principal do plano em `/planos/[planId]`.
@@ -18,6 +20,7 @@ A funcionalidade de Workout Plan permite que os usuários visualizem os detalhes
   - Componente de Card será reaproveitado, não recriado do zero.
 
 ## Technical Approach
+
 - **Rotas (Next.js App Router):**
   - `/planos/[planId]/page.tsx`: Lista os dias do plano e exibe cabeçalho.
   - `/planos/[planId]/dias/[dayId]/page.tsx`: Detalhes de um dia específico (rota migrada).
@@ -29,7 +32,9 @@ A funcionalidade de Workout Plan permite que os usuários visualizem os detalhes
 - **Design:** Next.js Components com Tailwind CSS para garantir responsividade total.
 
 ## Data Models / API Contracts
+
 Contratos principais da API (`src/lib/api/boo-train-api.ts`):
+
 ```typescript
 type GetWorkoutPlanWorkoutPlanId200 = {
   id: string;
@@ -51,6 +56,7 @@ type GetWorkoutPlanWorkoutPlanId200WorkoutDaysItem = {
 ```
 
 ## Dependencies
+
 - `@/lib/api/boo-train-api`: Chamadas de API.
 - `@/hooks/use-user`: Controle de autenticação.
 - Componente de card da home page (presente em `src/app/home/components/`).

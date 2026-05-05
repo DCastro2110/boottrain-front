@@ -1,12 +1,15 @@
 # Workout Day Feature Specification
 
 ## Overview
+
 This feature introduces the Workout Day page where users can view their exercises for a specific workout day, start a session, and mark it as completed.
 
 ## Routes
+
 - `/workout-plan/[id]/workout-day/[workoutDayId]`
 
 ## Technical Requirements
+
 - **Authentication:** If the user is not logged in, redirect them to the login page.
 - **Authorization:** If the API returns a permission error (e.g., 403), display an unauthorized access view with the message "Você não tem permissão para acessar esta página." and a "Voltar para o menu" button that redirects to the home page (`/`).
 - **Data Fetching:** Fetch workout day details using `getWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayId` from `src/lib/api/boo-train-api.ts`.
@@ -19,6 +22,7 @@ This feature introduces the Workout Day page where users can view their exercise
 - **Responsiveness:** The page must be responsive and look good on all devices.
 
 ## Tech Stack
+
 - Next.js 16.2.4 (App Router)
 - React 19.2.4
 - Tailwind CSS v4

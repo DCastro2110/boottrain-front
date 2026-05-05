@@ -10,6 +10,7 @@
 - Tanstack Query for data fetching and caching
 - ESLint with Next.js and React plugins, Prettier for code formatting
 - Chart.js with shadcn/ui for data visualization
+- Pencil for design and prototyping
 
 ## Commands
 
@@ -58,3 +59,14 @@ Client uses `better-auth/react` with `NEXT_PUBLIC_APP_URL` env var (default: `ht
 ## Naming Conventions
 
 - All file names must use **kebab-case** and be in **English**.
+- Component names must be in **PascalCase** (e.g., `MyComponent.tsx`).
+- Hooks must be in **camelCase** and start with `use` (e.g., `useFetchData.ts`).
+- API client functions should be named based on their action and resource (e.g., `getUser`, `createWorkoutPlan`).
+- Data-fetch functions should be named based on the data they fetch (e.g., `fetchWorkoutPlans`, `fetchUserProfile`).
+- Server actions should be named based on the action they perform (e.g., `createWorkoutSessionAction`, `updateUserSettingsAction`).
+
+## API Requests
+
+- Use the generated API client from `src/lib/api/booTrainAPI.ts` for all API requests. Do not use `fetch` directly in your components or pages.
+- For get data you should create a data-fetch function inside `src/data-fetch`.
+- For mutations, you should create a server action inside tha folder of the page that will use it. For example, if you have a page `src/app/home/page.tsx` and you need to create a mutation for that page, you should create a server action inside `src/app/home/_actions` folder.

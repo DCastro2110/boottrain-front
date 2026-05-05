@@ -16,13 +16,13 @@ This document lists the numbered subtasks for implementing the login screen feat
 
 All tasks have been completed:
 
-| Task | Description | Status |
-|------|-------------|--------|
-| 1 | Create login page route `/login` | ✅ Committed |
-| 2 | Create GoogleAuthButton client component | ✅ Committed |
-| 3 | Implement Google OAuth via authClient.signIn.social() | ✅ Committed |
-| 4 | Apply styling matching Pencil design (blue #2b54ff card, 402px width) | ✅ Committed |
-| 5 | Loading ("Entrando...") and error states in Portuguese | ✅ Committed |
+| Task | Description                                                           | Status       |
+| ---- | --------------------------------------------------------------------- | ------------ |
+| 1    | Create login page route `/login`                                      | ✅ Committed |
+| 2    | Create GoogleAuthButton client component                              | ✅ Committed |
+| 3    | Implement Google OAuth via authClient.signIn.social()                 | ✅ Committed |
+| 4    | Apply styling matching Pencil design (blue #2b54ff card, 402px width) | ✅ Committed |
+| 5    | Loading ("Entrando...") and error states in Portuguese                | ✅ Committed |
 
 ## Critical Dependencies
 
