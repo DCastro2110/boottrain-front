@@ -7,11 +7,14 @@ export async function getWorkoutDayData(
   workoutPlanId: string,
   workoutDayId: string
 ): Promise<getWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayIdResponse> {
+  const h = await headers();
+  const plainHeaders = Object.fromEntries(h.entries());
+
   const response = await getWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayId(
     workoutPlanId,
     workoutDayId,
     {
-      headers: await headers(),
+      headers: plainHeaders,
     }
   );
 
