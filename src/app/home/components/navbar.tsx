@@ -22,9 +22,9 @@ export function Navbar() {
         </Link>
 
         <Link
-          href="/plano"
+          href="/workout-plan"
           className={`flex h-12 w-12 items-center justify-center ${
-            isActive("/plano") ? "text-black" : "text-[#999999]"
+            isActive("/workout-plan") ? "text-black" : "text-[#999999]"
           }`}
         >
           <Calendar className="h-6 w-6" />
