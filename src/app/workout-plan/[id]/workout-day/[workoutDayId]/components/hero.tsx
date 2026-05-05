@@ -1,14 +1,13 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
 import { Calendar, Dumbbell, Loader2, Timer } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useTransition } from 'react';
 
 import { useToast } from '@/components/ui/toast';
-import {
-  type GetWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayId200,
-  postWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayIdSessions,
-} from '@/lib/api/boo-train-api';
+import type { GetWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayId200 } from '@/lib/api/boo-train-api';
+
+import { startWorkoutAction } from '../_actions';
 
 interface HeroProps {
   workoutDay: GetWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayId200;
@@ -37,21 +36,19 @@ function getFullWeekdayName(weekDay: string): string {
 export function Hero({ workoutDay, workoutPlanId, workoutDayId }: HeroProps) {
   const { addToast } = useToast();
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
-  const mutation = useMutation({
-    mutationFn: () =>
-      postWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayIdSessions(
-        workoutPlanId,
-        workoutDayId,
-      ),
-    onSuccess: () => {
-      addToast('Treino iniciado!', 'success');
-      router.refresh();
-    },
-    onError: () => {
-      addToast('Erro ao iniciar treino', 'error');
-    },
-  });
+  const handleStartWorkout = () => {
+    startTransition(async () => {
+      try {
+        await startWorkoutAction(workoutPlanId, workoutDayId);
+        addToast('Treino iniciado!', 'success');
+        router.refresh();
+      } catch {
+        addToast('Erro ao iniciar treino', 'error');
+      }
+    });
+  };
 
   const weekdayName = getFullWeekdayName(workoutDay.weekDay);
   const isSessionActive = !!workoutDay.workoutSessionId;
@@ -102,11 +99,11 @@ export function Hero({ workoutDay, workoutPlanId, workoutDayId }: HeroProps) {
 
         {!isSessionActive ? (
           <button
-            onClick={() => mutation.mutate()}
-            disabled={mutation.isPending}
-            className="h-10 rounded-full bg-[#2b54ff] px-4 text-sm font-semibold text-white disabled:opacity-50 flex items-center gap-2"
+            onClick={handleStartWorkout}
+            disabled={isPending}
+            className="flex h-10 items-center gap-2 rounded-full bg-[#2b54ff] px-4 text-sm font-semibold text-white disabled:opacity-50"
           >
-            {mutation.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
+            {isPending && <Loader2 className="h-4 w-4 animate-spin" />}
             Iniciar Treino
           </button>
         ) : (

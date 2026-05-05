@@ -1,13 +1,12 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
-import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/toast';
-import { patchWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayIdSessionsSessionId } from '@/lib/api/boo-train-api';
+
+import { finishWorkoutAction } from '../_actions';
 
 interface FinishButtonProps {
   workoutPlanId: string;
@@ -22,34 +21,52 @@ export function FinishButton({
 }: FinishButtonProps) {
   const [showSuccess, setShowSuccess] = useState(false);
   const { addToast } = useToast();
+  const [isPending, startTransition] = useTransition();
 
-  const mutation = useMutation({
-    mutationFn: () => {
-      if (!sessionId) throw new Error('No active session');
-      return patchWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayIdSessionsSessionId(
-        workoutPlanId,
-        workoutDayId,
-        sessionId
-      );
-    },
-    onSuccess: () => {
-      setShowSuccess(true);
-    },
-    onError: () => {
-      addToast('Erro ao concluir treino', 'error');
-    },
-  });
+  const handleFinishWorkout = () => {
+    if (!sessionId) return;
+
+    startTransition(async () => {
+      try {
+        await finishWorkoutAction(workoutPlanId, workoutDayId, sessionId);
+        setShowSuccess(true);
+      } catch {
+        addToast('Erro ao concluir treino', 'error');
+      }
+    });
+  };
 
   if (!sessionId) return null;
 
   return (
     <>
       <button
-        onClick={() => mutation.mutate()}
-        disabled={mutation.isPending}
+        onClick={handleFinishWorkout}
+        disabled={isPending}
         className="flex h-12 w-full items-center justify-center rounded-full border border-[#f1f1f1] bg-white text-sm font-semibold text-gray-900 transition-colors hover:bg-gray-50 disabled:opacity-50"
       >
-        {mutation.isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+        {isPending && (
+          <svg
+            className="mr-2 h-4 w-4 animate-spin"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            />
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+            />
+          </svg>
+        )}
         Marcar como concluído
       </button>
 
