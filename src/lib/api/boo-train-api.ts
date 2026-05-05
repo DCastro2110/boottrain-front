@@ -323,8 +323,6 @@ export type GetWorkoutPlan200ItemWorkoutDaysItem = {
 export type GetWorkoutPlan200Item = {
   /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
   id: string;
-  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
-  userId: string;
   name: string;
   description: string;
   isActive: boolean;
@@ -375,6 +373,8 @@ export type GetWorkoutPlanWorkoutPlanId200WorkoutDaysItem = {
   name: string;
   isRestDay: boolean;
   weekDay: GetWorkoutPlanWorkoutPlanId200WorkoutDaysItemWeekDay;
+  /** @nullable */
+  coverImageUrl: string | null;
   estimatedDurationInSeconds: number;
   workoutExercises: GetWorkoutPlanWorkoutPlanId200WorkoutDaysItemWorkoutExercisesItem[];
 };
@@ -384,8 +384,6 @@ export type GetWorkoutPlanWorkoutPlanId200 = {
   id: string;
   name: string;
   description: string;
-  /** @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$ */
-  userId: string;
   isActive: boolean;
   workoutDays: GetWorkoutPlanWorkoutPlanId200WorkoutDaysItem[];
 };
@@ -503,10 +501,7 @@ export type GetWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayId200 = {
   numberOfExercises: number;
   /** @nullable */
   coverImageUrl: string | null;
-  /**
-     * @nullable
-     * @pattern ^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$
-     */
+  /** @nullable */
   workoutSessionId: string | null;
   workoutExercises: GetWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayId200WorkoutExercisesItem[];
 };
