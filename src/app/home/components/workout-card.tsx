@@ -1,7 +1,5 @@
-"use client";
-
-import { Calendar, Dumbbell, Timer } from "lucide-react";
-import Link from "next/link";
+import { Calendar, Dumbbell, Timer } from 'lucide-react';
+import Link from 'next/link';
 
 interface IWorkoutCardProps {
   planId: string;
@@ -25,13 +23,13 @@ function getFullWeekdayName(dateString: string): string {
   const [year, month, day] = dateString.split('-').map(Number);
   const date = new Date(year, month - 1, day);
   const weekdays = [
-    "DOMINGO",
-    "SEGUNDA",
-    "TERÇA",
-    "QUARTA",
-    "QUINTA",
-    "SEXTA",
-    "SÁBADO",
+    'DOMINGO',
+    'SEGUNDA',
+    'TERÇA',
+    'QUARTA',
+    'QUINTA',
+    'SEXTA',
+    'SÁBADO',
   ];
   return weekdays[date.getDay()];
 }
@@ -46,7 +44,7 @@ export function WorkoutCard({ planId, dayId, workout }: IWorkoutCardProps) {
         style={{
           backgroundImage: workout.coverImageUrl
             ? `linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url(${workout.coverImageUrl})`
-            : "linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2))",
+            : 'linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2))',
         }}
       >
         <div className="absolute inset-0 rounded-xl bg-black/40" />
@@ -70,8 +68,8 @@ export function WorkoutCard({ planId, dayId, workout }: IWorkoutCardProps) {
             <div className="flex items-center gap-1 text-[12px] text-white/70">
               <Dumbbell className="h-3.5 w-3.5" />
               <span>
-                {workout.numberOfExercises}{" "}
-                {workout.numberOfExercises === 1 ? "exercício" : "exercícios"}
+                {workout.numberOfExercises}{' '}
+                {workout.numberOfExercises === 1 ? 'exercício' : 'exercícios'}
               </span>
             </div>
           </div>

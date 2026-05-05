@@ -42,7 +42,7 @@ export function Hero({ workoutDay, workoutPlanId, workoutDayId }: HeroProps) {
     mutationFn: () =>
       postWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayIdSessions(
         workoutPlanId,
-        workoutDayId
+        workoutDayId,
       ),
     onSuccess: () => {
       addToast('Treino iniciado!', 'success');
