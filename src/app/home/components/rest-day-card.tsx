@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Calendar, Zap } from "lucide-react";
+import { Calendar, Zap } from 'lucide-react';
 
 interface IRestDayCardProps {
   weekday: string;

@@ -1,6 +1,7 @@
 'use client';
 
 import { Flame } from 'lucide-react';
+import Link from 'next/link';
 
 interface ConsistencyDay {
   day:
@@ -109,7 +110,9 @@ export function ConsistencyBoard({
         <span className="text-[18px] font-semibold text-black">
           Consistência
         </span>
-        <span className="text-[12px] text-[#2b54ff]">Ver histórico</span>
+        <Link href="/stats" className="text-[12px] text-[#2b54ff]">
+          Stats
+        </Link>
       </div>
 
       <div className="flex items-center justify-between gap-3">

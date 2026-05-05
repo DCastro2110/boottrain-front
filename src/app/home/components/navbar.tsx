@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { BarChart3, Calendar, House, Sparkles, User } from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { BarChart3, Calendar, House, Sparkles, User } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export function Navbar() {
   const pathname = usePathname();
@@ -15,7 +15,7 @@ export function Navbar() {
         <Link
           href="/"
           className={`flex h-12 w-12 items-center justify-center ${
-            isActive("/") ? "text-black" : "text-[#999999]"
+            isActive('/') ? 'text-black' : 'text-[#999999]'
           }`}
         >
           <House className="h-6 w-6" />
@@ -24,7 +24,7 @@ export function Navbar() {
         <Link
           href="/workout-plan"
           className={`flex h-12 w-12 items-center justify-center ${
-            isActive("/workout-plan") ? "text-black" : "text-[#999999]"
+            isActive('/workout-plan') ? 'text-black' : 'text-[#999999]'
           }`}
         >
           <Calendar className="h-6 w-6" />
@@ -38,9 +38,9 @@ export function Navbar() {
         </Link>
 
         <Link
-          href="/evolucao"
+          href="/stats"
           className={`flex h-12 w-12 items-center justify-center ${
-            isActive("/evolucao") ? "text-black" : "text-[#999999]"
+            isActive('/stats') ? 'text-black' : 'text-[#999999]'
           }`}
         >
           <BarChart3 className="h-6 w-6" />
@@ -49,7 +49,7 @@ export function Navbar() {
         <Link
           href="/perfil"
           className={`flex h-12 w-12 items-center justify-center ${
-            isActive("/perfil") ? "text-black" : "text-[#999999]"
+            isActive('/perfil') ? 'text-black' : 'text-[#999999]'
           }`}
         >
           <User className="h-6 w-6" />
