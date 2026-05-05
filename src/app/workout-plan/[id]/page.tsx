@@ -35,7 +35,15 @@ function getNextDateForWeekday(weekday: string): string {
 function getWeekdayName(dateString: string): string {
   const [year, month, day] = dateString.split('-').map(Number);
   const date = new Date(year, month - 1, day);
-  const weekdays = ['DOMINGO', 'SEGUNDA', 'TERÇA', 'QUARTA', 'QUINTA', 'SEXTA', 'SÁBADO'];
+  const weekdays = [
+    'DOMINGO',
+    'SEGUNDA',
+    'TERÇA',
+    'QUARTA',
+    'QUINTA',
+    'SEXTA',
+    'SÁBADO',
+  ];
   return weekdays[date.getDay()];
 }
 

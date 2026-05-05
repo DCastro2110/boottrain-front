@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { Flame } from "lucide-react";
+import { Flame } from 'lucide-react';
 
 interface ConsistencyDay {
   day:
-    | "SUNDAY"
-    | "MONDAY"
-    | "TUESDAY"
-    | "WEDNESDAY"
-    | "THURSDAY"
-    | "FRIDAY"
-    | "SATURDAY";
-  status: "completed" | "not_completed" | "missed";
+    | 'SUNDAY'
+    | 'MONDAY'
+    | 'TUESDAY'
+    | 'WEDNESDAY'
+    | 'THURSDAY'
+    | 'FRIDAY'
+    | 'SATURDAY';
+  status: 'completed' | 'not_completed' | 'missed';
 }
 
 interface IConsistencyBoardProps {
@@ -19,31 +19,31 @@ interface IConsistencyBoardProps {
   fireSequence: number;
 }
 
-const DAY_ABBREVIATIONS: Record<ConsistencyDay["day"], string> = {
-  SUNDAY: "D",
-  MONDAY: "S",
-  TUESDAY: "T",
-  WEDNESDAY: "Q",
-  THURSDAY: "Q",
-  FRIDAY: "S",
-  SATURDAY: "S",
+const DAY_ABBREVIATIONS: Record<ConsistencyDay['day'], string> = {
+  SUNDAY: 'D',
+  MONDAY: 'S',
+  TUESDAY: 'T',
+  WEDNESDAY: 'Q',
+  THURSDAY: 'Q',
+  FRIDAY: 'S',
+  SATURDAY: 'S',
 };
 
 const STATUS_COLORS = {
-  completed: "bg-[#2b54ff]",
-  not_completed: "bg-transparent border border-[#f1f1f1]",
-  missed: "bg-[#d5dffe]",
-  future: "bg-transparent border border-[#f1f1f1]",
+  completed: 'bg-[#2b54ff]',
+  not_completed: 'bg-transparent border border-[#f1f1f1]',
+  missed: 'bg-[#d5dffe]',
+  future: 'bg-transparent border border-[#f1f1f1]',
 };
 
-const DAY_ORDER: ConsistencyDay["day"][] = [
-  "SUNDAY",
-  "MONDAY",
-  "TUESDAY",
-  "WEDNESDAY",
-  "THURSDAY",
-  "FRIDAY",
-  "SATURDAY",
+const DAY_ORDER: ConsistencyDay['day'][] = [
+  'SUNDAY',
+  'MONDAY',
+  'TUESDAY',
+  'WEDNESDAY',
+  'THURSDAY',
+  'FRIDAY',
+  'SATURDAY',
 ];
 
 export function ConsistencyBoard({
@@ -53,19 +53,19 @@ export function ConsistencyBoard({
   const today = new Date();
   const currentDayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, etc.
 
-  const isFutureDay = (day: ConsistencyDay["day"]): boolean => {
+  const isFutureDay = (day: ConsistencyDay['day']): boolean => {
     // Corrected logic for Seg-Dom order
     const dayJsIndex = [0, 1, 2, 3, 4, 5, 6].find(
       (i) =>
         [
-          "SUNDAY",
-          "MONDAY",
-          "TUESDAY",
-          "WEDNESDAY",
-          "THURSDAY",
-          "FRIDAY",
-          "SATURDAY",
-        ][i] === day
+          'SUNDAY',
+          'MONDAY',
+          'TUESDAY',
+          'WEDNESDAY',
+          'THURSDAY',
+          'FRIDAY',
+          'SATURDAY',
+        ][i] === day,
     );
 
     // Simplest is to compare with JS getDay()
@@ -76,18 +76,18 @@ export function ConsistencyBoard({
     return normalizedDay > normalizedCurrent;
   };
 
-  const isToday = (day: ConsistencyDay["day"]): boolean => {
+  const isToday = (day: ConsistencyDay['day']): boolean => {
     const dayJsIndex = [0, 1, 2, 3, 4, 5, 6].find(
       (i) =>
         [
-          "SUNDAY",
-          "MONDAY",
-          "TUESDAY",
-          "WEDNESDAY",
-          "THURSDAY",
-          "FRIDAY",
-          "SATURDAY",
-        ][i] === day
+          'SUNDAY',
+          'MONDAY',
+          'TUESDAY',
+          'WEDNESDAY',
+          'THURSDAY',
+          'FRIDAY',
+          'SATURDAY',
+        ][i] === day,
     );
     return dayJsIndex === currentDayOfWeek;
   };
@@ -100,7 +100,7 @@ export function ConsistencyBoard({
   };
 
   const sortedConsistency = [...consistency].sort(
-    (a, b) => DAY_ORDER.indexOf(a.day) - DAY_ORDER.indexOf(b.day)
+    (a, b) => DAY_ORDER.indexOf(a.day) - DAY_ORDER.indexOf(b.day),
   );
 
   return (
@@ -115,12 +115,15 @@ export function ConsistencyBoard({
       <div className="flex items-center justify-between gap-3">
         <div className="flex flex-1 gap-3 rounded-xl border border-[#f1f1f1] p-5">
           {sortedConsistency.map((dayInfo) => (
-            <div key={dayInfo.day} className="flex flex-col items-center gap-1.5">
+            <div
+              key={dayInfo.day}
+              className="flex flex-col items-center gap-1.5"
+            >
               <div
                 className={`h-5 w-5 rounded-[6px] ${getStatusColor(dayInfo)} ${
                   isToday(dayInfo.day)
-                    ? "ring-2 ring-[#2b54ff] ring-offset-0"
-                    : ""
+                    ? 'ring-2 ring-[#2bff8a] ring-offset-0'
+                    : ''
                 }`}
               />
               <span className="text-[12px] font-normal text-[#656565]">
