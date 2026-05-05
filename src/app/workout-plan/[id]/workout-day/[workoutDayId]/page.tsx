@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 import { Navbar } from '@/app/home/components/navbar';
-import { Button } from '@/components/ui/button';
+import { ErrorPage } from '@/components/error-page';
 import { getWorkoutDayData } from '@/data-fetch/get-workout-day';
 import { authClient } from '@/lib/auth-client';
 
@@ -37,18 +37,11 @@ export default async function WorkoutDayPage({
   } catch (error) {
     console.error('Failed to fetch workout day data:', error);
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-white p-5 text-center">
-        <h1 className="mb-6 text-xl font-bold text-gray-900">
-          Ocorreu um erro ao carregar o treino.
-        </h1>
-        <Button
-          render={<Link href="/" />}
-          nativeButton={false}
-          className="h-12 w-full max-w-xs rounded-xl bg-[#2b54ff] text-base font-semibold text-white"
-        >
-          Voltar para o menu
-        </Button>
-      </div>
+      <ErrorPage
+        title="Ocorreu um erro ao carregar o treino."
+        backHref={`/workout-plan/${id}`}
+        backLabel="Voltar para o plano"
+      />
     );
   }
 
@@ -58,52 +51,31 @@ export default async function WorkoutDayPage({
     response.status !== 404
   ) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-white p-5 text-center">
-        <h1 className="mb-6 text-xl font-bold text-gray-900">
-          Ocorreu um erro ao carregar o treino.
-        </h1>
-        <Button
-          render={<Link href="/" />}
-          nativeButton={false}
-          className="h-12 w-full max-w-xs rounded-xl bg-[#2b54ff] text-base font-semibold text-white"
-        >
-          Voltar para o menu
-        </Button>
-      </div>
+      <ErrorPage
+        title="Ocorreu um erro ao carregar o treino."
+        backHref={`/workout-plan/${id}`}
+        backLabel="Voltar para o plano"
+      />
     );
   }
 
   if (response.status === 403) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-white p-5 text-center">
-        <h1 className="mb-6 text-xl font-bold text-gray-900">
-          Você não tem permissão para acessar esta página.
-        </h1>
-        <Button
-          render={<Link href="/" />}
-          nativeButton={false}
-          className="h-12 w-full max-w-xs rounded-xl bg-[#2b54ff] text-base font-semibold text-white"
-        >
-          Voltar para o menu
-        </Button>
-      </div>
+      <ErrorPage
+        title="Você não tem permissão para acessar esta página."
+        backHref={`/workout-plan/${id}`}
+        backLabel="Voltar para o plano"
+      />
     );
   }
 
   if (response.status === 404) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center bg-white p-5 text-center">
-        <h1 className="mb-6 text-xl font-bold text-gray-900">
-          Treino não encontrado.
-        </h1>
-        <Button
-          render={<Link href="/" />}
-          nativeButton={false}
-          className="h-12 w-full max-w-xs rounded-xl bg-[#2b54ff] text-base font-semibold text-white"
-        >
-          Voltar para o menu
-        </Button>
-      </div>
+      <ErrorPage
+        title="Treino não encontrado."
+        backHref={`/workout-plan/${id}`}
+        backLabel="Voltar para o plano"
+      />
     );
   }
 
