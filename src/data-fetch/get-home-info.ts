@@ -1,5 +1,5 @@
-import type { GetHomeInfo200 } from "@/lib/api/boo-train-api";
-import { getHomeInfo } from "@/lib/api/boo-train-api";
+import type { GetHomeInfo200 } from '@/lib/api/boo-train-api';
+import { getHomeInfo } from '@/lib/api/boo-train-api';
 
 export async function getHomeInfoData(): Promise<GetHomeInfo200 | null> {
   try {
@@ -12,7 +12,7 @@ export async function getHomeInfoData(): Promise<GetHomeInfo200 | null> {
     console.error(`Home info API returned status ${response.status}`);
     return null;
   } catch (error) {
-    console.error("Failed to fetch home info:", error);
+    console.error('Failed to fetch home info:', error);
     return null;
   }
 }
