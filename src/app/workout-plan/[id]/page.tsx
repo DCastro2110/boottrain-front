@@ -5,8 +5,8 @@ import { redirect } from 'next/navigation';
 
 import { ErrorContainer } from '@/components/layout/error-container';
 import { Navbar } from '@/components/layout/navbar';
-import { RestDayCard } from '@/components/shared/rest-day-card';
-import { WorkoutCard } from '@/components/shared/workout-card';
+import { RestDayCard } from '@/components/workout/rest-day-card';
+import { WorkoutCard } from '@/components/workout/workout-card';
 import { getWorkoutPlanById } from '@/data-fetch/get-workout-plan';
 import { authClient } from '@/lib/auth-client';
 

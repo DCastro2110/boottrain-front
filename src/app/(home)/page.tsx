@@ -2,11 +2,12 @@ import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 import { Navbar } from '@/components/layout/navbar';
-import { Banner } from '@/components/shared/banner';
-import { ConsistencyBoard } from '@/components/shared/consistency-board';
-import { TodayWorkout } from '@/components/shared/today-workout';
 import { getHomeInfoData } from '@/data-fetch/get-home-info';
 import { authClient } from '@/lib/auth-client';
+
+import { Banner } from './_components/banner';
+import { ConsistencyBoard } from './_components/consistency-board';
+import { TodayWorkout } from './_components/today-workout';
 
 export const dynamic = 'force-dynamic';
 

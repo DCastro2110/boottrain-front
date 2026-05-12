@@ -1,9 +1,8 @@
 import Link from 'next/link';
 
+import { RestDayCard } from '@/components/workout/rest-day-card';
+import { WorkoutCard } from '@/components/workout/workout-card';
 import type { GetHomeInfo200TodayWorkoutDay } from '@/lib/api/boo-train-api';
-
-import { RestDayCard } from './rest-day-card';
-import { WorkoutCard } from './workout-card';
 
 interface ITodayWorkoutProps {
   todayWorkoutDay: GetHomeInfo200TodayWorkoutDay;
