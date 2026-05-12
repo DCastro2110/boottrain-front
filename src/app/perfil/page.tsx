@@ -2,8 +2,8 @@ import { BicepsFlexed, Ruler, Scale, User } from 'lucide-react';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-import { Navbar } from '@/app/(home)/components/navbar';
-import { ErrorPage } from '@/components/error-page';
+import { ErrorContainer } from '@/components/layout/error-container';
+import { Navbar } from '@/components/layout/navbar';
 import { getProfileData } from '@/data-fetch/get-profile-data';
 import { authClient } from '@/lib/auth-client';
 
@@ -28,7 +28,7 @@ export default async function ProfilePage() {
 
   if (!profile) {
     return (
-      <ErrorPage
+      <ErrorContainer
         title="Ocorreu um erro ao carregar os dados do perfil."
         backHref="/"
         backLabel="Voltar para o menu"

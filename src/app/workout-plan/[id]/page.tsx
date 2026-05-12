@@ -3,10 +3,10 @@ import { headers } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-import { Navbar } from '@/app/(home)/components/navbar';
-import { RestDayCard } from '@/app/(home)/components/rest-day-card';
-import { WorkoutCard } from '@/app/(home)/components/workout-card';
-import { ErrorPage } from '@/components/error-page';
+import { ErrorContainer } from '@/components/layout/error-container';
+import { Navbar } from '@/components/layout/navbar';
+import { RestDayCard } from '@/components/shared/rest-day-card';
+import { WorkoutCard } from '@/components/shared/workout-card';
 import { getWorkoutPlanById } from '@/data-fetch/get-workout-plan';
 import { authClient } from '@/lib/auth-client';
 
@@ -70,7 +70,7 @@ export default async function WorkoutPlanPage({
   } catch (error) {
     console.error('Failed to fetch workout plan data:', error);
     return (
-      <ErrorPage
+      <ErrorContainer
         title="Ocorreu um erro ao carregar o plano de treino."
         backHref="/workout-plan"
         backLabel="Voltar para a lista"
@@ -80,7 +80,7 @@ export default async function WorkoutPlanPage({
 
   if (!response) {
     return (
-      <ErrorPage
+      <ErrorContainer
         title="Ocorreu um erro ao carregar o plano de treino."
         backHref="/workout-plan"
         backLabel="Voltar para a lista"

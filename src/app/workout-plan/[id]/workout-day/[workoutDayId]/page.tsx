@@ -3,8 +3,8 @@ import { headers } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-import { Navbar } from '@/app/(home)/components/navbar';
-import { ErrorPage } from '@/components/error-page';
+import { ErrorContainer } from '@/components/layout/error-container';
+import { Navbar } from '@/components/layout/navbar';
 import { getWorkoutDayData } from '@/data-fetch/get-workout-day';
 import { authClient } from '@/lib/auth-client';
 
@@ -37,7 +37,7 @@ export default async function WorkoutDayPage({
   } catch (error) {
     console.error('Failed to fetch workout day data:', error);
     return (
-      <ErrorPage
+      <ErrorContainer
         title="Ocorreu um erro ao carregar o treino."
         backHref={`/workout-plan/${id}`}
         backLabel="Voltar para o plano"
@@ -51,7 +51,7 @@ export default async function WorkoutDayPage({
     response.status !== 404
   ) {
     return (
-      <ErrorPage
+      <ErrorContainer
         title="Ocorreu um erro ao carregar o treino."
         backHref={`/workout-plan/${id}`}
         backLabel="Voltar para o plano"
@@ -61,7 +61,7 @@ export default async function WorkoutDayPage({
 
   if (response.status === 403) {
     return (
-      <ErrorPage
+      <ErrorContainer
         title="Você não tem permissão para acessar esta página."
         backHref={`/workout-plan/${id}`}
         backLabel="Voltar para o plano"
@@ -71,7 +71,7 @@ export default async function WorkoutDayPage({
 
   if (response.status === 404) {
     return (
-      <ErrorPage
+      <ErrorContainer
         title="Treino não encontrado."
         backHref={`/workout-plan/${id}`}
         backLabel="Voltar para o plano"

@@ -3,8 +3,8 @@ import { headers } from 'next/headers';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 
-import { Navbar } from '@/app/home/components/navbar';
-import { ErrorPage } from '@/components/error-page';
+import { ErrorContainer } from '@/components/layout/error-container';
+import { Navbar } from '@/components/layout/navbar';
 import { getHomeInfoData } from '@/data-fetch/get-home-info';
 import { getStatsData } from '@/data-fetch/stats';
 import { authClient } from '@/lib/auth-client';
@@ -39,7 +39,7 @@ export default async function StatsPage() {
 
   if (!stats) {
     return (
-      <ErrorPage
+      <ErrorContainer
         title="Ocorreu um erro ao carregar os dados de consistência."
         backHref="/"
         backLabel="Voltar para o menu"

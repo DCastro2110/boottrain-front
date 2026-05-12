@@ -2,8 +2,8 @@ import { headers } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-import { Navbar } from '@/app/(home)/components/navbar';
-import { ErrorPage } from '@/components/error-page';
+import { ErrorContainer } from '@/components/layout/error-container';
+import { Navbar } from '@/components/layout/navbar';
 import { getWorkoutPlanData } from '@/data-fetch/get-workout-plan';
 import { authClient } from '@/lib/auth-client';
 
@@ -24,7 +24,7 @@ export default async function WorkoutPlansPage() {
 
   if (!plans) {
     return (
-      <ErrorPage
+      <ErrorContainer
         title="Ocorreu um erro ao carregar os planos de treino."
         backHref="/"
         backLabel="Voltar para o menu"
