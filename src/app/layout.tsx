@@ -2,7 +2,9 @@ import './globals.css';
 
 import type { Metadata } from 'next';
 import { Anton, Inter_Tight } from 'next/font/google';
+import { NuqsAdapter } from 'nuqs/adapters/next';
 
+import { AIModalProvider } from '@/components/ui/ai-modal-provider';
 import { ToastProvider } from '@/components/ui/toast';
 import { UserProvider } from '@/context/user-provider';
 import { QueryProvider } from '@/providers/query-provider';
@@ -35,11 +37,15 @@ export default function RootLayout({
       className={`${interTight.variable} ${anton.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-primary">
-        <ToastProvider>
-          <QueryProvider>
-            <UserProvider>{children}</UserProvider>
-          </QueryProvider>
-        </ToastProvider>
+        <NuqsAdapter>
+          <ToastProvider>
+            <QueryProvider>
+              <AIModalProvider>
+                <UserProvider>{children}</UserProvider>
+              </AIModalProvider>
+            </QueryProvider>
+          </ToastProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );
