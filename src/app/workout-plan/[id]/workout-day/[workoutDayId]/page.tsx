@@ -3,7 +3,7 @@ import { headers } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-import { Navbar } from '@/app/home/components/navbar';
+import { Navbar } from '@/app/(home)/components/navbar';
 import { ErrorPage } from '@/components/error-page';
 import { getWorkoutDayData } from '@/data-fetch/get-workout-day';
 import { authClient } from '@/lib/auth-client';

@@ -2,7 +2,7 @@ import { headers } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-import { Navbar } from '@/app/home/components/navbar';
+import { Navbar } from '@/app/(home)/components/navbar';
 import { ErrorPage } from '@/components/error-page';
 import { getWorkoutPlanData } from '@/data-fetch/get-workout-plan';
 import { authClient } from '@/lib/auth-client';

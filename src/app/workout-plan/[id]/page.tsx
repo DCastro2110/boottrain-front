@@ -3,9 +3,9 @@ import { headers } from 'next/headers';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-import { Navbar } from '@/app/home/components/navbar';
-import { RestDayCard } from '@/app/home/components/rest-day-card';
-import { WorkoutCard } from '@/app/home/components/workout-card';
+import { Navbar } from '@/app/(home)/components/navbar';
+import { RestDayCard } from '@/app/(home)/components/rest-day-card';
+import { WorkoutCard } from '@/app/(home)/components/workout-card';
 import { ErrorPage } from '@/components/error-page';
 import { getWorkoutPlanById } from '@/data-fetch/get-workout-plan';
 import { authClient } from '@/lib/auth-client';

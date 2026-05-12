@@ -4,10 +4,10 @@ import { redirect } from 'next/navigation';
 import { getHomeInfoData } from '@/data-fetch/get-home-info';
 import { authClient } from '@/lib/auth-client';
 
-import { Banner } from './home/components/banner';
-import { ConsistencyBoard } from './home/components/consistency-board';
-import { Navbar } from './home/components/navbar';
-import { TodayWorkout } from './home/components/today-workout';
+import { Banner } from './(home)/components/banner';
+import { ConsistencyBoard } from './(home)/components/consistency-board';
+import { Navbar } from './(home)/components/navbar';
+import { TodayWorkout } from './(home)/components/today-workout';
 
 export const dynamic = 'force-dynamic';
 

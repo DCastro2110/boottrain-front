@@ -2,7 +2,7 @@ import { BicepsFlexed, Ruler, Scale, User } from 'lucide-react';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-import { Navbar } from '@/app/home/components/navbar';
+import { Navbar } from '@/app/(home)/components/navbar';
 import { ErrorPage } from '@/components/error-page';
 import { getProfileData } from '@/data-fetch/get-profile-data';
 import { authClient } from '@/lib/auth-client';
