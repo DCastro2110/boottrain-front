@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { Anton, Inter_Tight } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next';
 
-import { AIModalProvider } from '@/components/ui/ai-modal-provider';
+import { AIModalProvider } from '@/components/ai/ai-modal-provider';
 import { ToastProvider } from '@/components/ui/toast';
 import { UserProvider } from '@/context/user-provider';
 import { QueryProvider } from '@/providers/query-provider';
