@@ -6,8 +6,8 @@ import { X } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef,useState } from 'react';
 
-import { ChatInput } from '@/components/ui/chat-input';
-import { ChatMessages } from '@/components/ui/chat-messages';
+import { ChatInput } from '@/components/ai/chat-input';
+import { ChatMessages } from '@/components/ai/chat-messages';
 
 interface IAIModalProps {
   isOpen: boolean;

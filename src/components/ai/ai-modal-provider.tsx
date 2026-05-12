@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { AIModal } from '@/components/ui/ai-modal';
+import { AIModal } from '@/components/ai/ai-modal';
 import { AIModalContext } from '@/context/ai-modal-context';
 
 export function AIModalProvider({ children }: { children: React.ReactNode }) {
