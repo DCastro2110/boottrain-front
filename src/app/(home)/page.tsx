@@ -1,13 +1,12 @@
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 
+import { Navbar } from '@/components/layout/navbar';
+import { Banner } from '@/components/shared/banner';
+import { ConsistencyBoard } from '@/components/shared/consistency-board';
+import { TodayWorkout } from '@/components/shared/today-workout';
 import { getHomeInfoData } from '@/data-fetch/get-home-info';
 import { authClient } from '@/lib/auth-client';
-
-import { Banner } from './(home)/components/banner';
-import { ConsistencyBoard } from './(home)/components/consistency-board';
-import { Navbar } from './(home)/components/navbar';
-import { TodayWorkout } from './(home)/components/today-workout';
 
 export const dynamic = 'force-dynamic';
 
