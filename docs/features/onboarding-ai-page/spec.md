@@ -78,7 +78,7 @@ A mandatory onboarding flow for new users who lack essential body metrics (weigh
 
 ### API Integration
 
-- `getUsersUserId(userId)` - fetch current user profile
+- `getUsersUserId(userId)` - fetch current user profile (from `@/lib/api/boo-train-api.ts`)
 - `putUsersUserId(userId, body)` - update user profile with collected data
 
 ## Data Models / API Contracts
