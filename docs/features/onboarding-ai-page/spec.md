@@ -14,29 +14,33 @@ A mandatory onboarding flow for new users who lack essential body metrics (weigh
 ## Scope
 
 ### In Scope
+
 - Onboarding page at `/onboarding` with AI chat interface
 - Server-side proxy to validate user profile completeness
-- Redirection logic from login and home pages
+- Onboarding page self-restricts access to incomplete profiles only
 - Responsive design (mobile-first, desktop-compatible)
 - Reuse of existing AI components from `@/components/ai`
 - AI-powered conversation to collect: weight, height, age, body fat percentage
 
 ### Out of Scope
+
 - Modifying existing AI components (reuse only)
 - Backend API changes
 - Authentication flow modifications
+- Modifications to login page or home page
 - Analytics/tracking
 
 ## Requirements
 
 ### Functional Requirements
 
-- FR-1: User without complete profile (weight, height, age, body fat percentage) is redirected to `/onboarding` after login
+- FR-1: Onboarding page (`/onboarding`) is only accessible to users with incomplete profiles. Users with complete profiles are redirected to home.
 - FR-2: Onboarding page displays an AI chat interface matching design OY1JW
 - FR-3: AI chat collects required user information through conversation
 - FR-4: Upon successful data collection, user is redirected to home page
-- FR-5: Server-side proxy validates profile completeness before rendering protected routes
+- FR-5: Server-side proxy validates profile completeness
 - FR-6: Responsive layout works on mobile (primary) and desktop
+- FR-7: Login page and home page remain unchanged
 
 ### Non-Functional Requirements
 
@@ -55,14 +59,15 @@ A mandatory onboarding flow for new users who lack essential body metrics (weigh
 
 ### Data Flow
 
-1. User logs in → session created
-2. User accesses `/` or any protected route
-3. Proxy checks: Does user have weight, height, age, AND body fat percentage?
-   - If YES → proceed to requested page
-   - If NO → redirect to `/onboarding`
-4. On `/onboarding`: AI chat collects missing information
-5. AI collects all data → calls `putUsersUserId` to update profile
-6. User redirected to home
+1. User logs in → session created → goes to home page
+2. User with incomplete profile manually navigates to `/onboarding` (or we can add a link in the UI for incomplete profiles - but this is out of scope per requirements)
+3. User accesses `/onboarding`
+4. Proxy checks: Does user have weight, height, age, AND body fat percentage?
+   - If YES → redirect to `/` (user already completed onboarding)
+   - If NO → show onboarding page
+5. On `/onboarding`: AI chat collects missing information
+6. AI collects all data → calls `putUsersUserId` to update profile
+7. User redirected to home
 
 ### Key Components
 
@@ -92,6 +97,7 @@ interface UserProfile {
 ### Validation Logic
 
 User has complete profile when ALL fields are non-null:
+
 - `height !== null`
 - `weight !== null`
 - `age !== null`

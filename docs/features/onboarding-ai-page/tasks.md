@@ -2,7 +2,7 @@
 
 - [ ] 1. Create onboarding page route structure
 - [ ] 2. Implement profile completeness validation proxy
-- [ ] 3. Add redirect logic to protected routes
+- [ ] 3. Restrict onboarding page access (redirect complete profiles to home)
 - [ ] 4. Build onboarding page UI matching design OY1JW
 - [ ] 5. Connect AI chat to collect user data
 - [ ] 6. Add responsive styling
