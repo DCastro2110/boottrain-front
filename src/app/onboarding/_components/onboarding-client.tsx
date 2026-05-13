@@ -8,13 +8,9 @@ import { useState } from 'react';
 
 import { SuggestedChips } from '@/components/ai/suggested-chips';
 
-interface OnboardingClientProps {
-  userId: string;
-}
-
 const INITIAL_MESSAGE = 'Vamos configurar meu perfil';
 
-export function OnboardingClient({ userId: _userId }: OnboardingClientProps) {
+export function OnboardingClient() {
   const router = useRouter();
   const [input, setInput] = useState('');
 
