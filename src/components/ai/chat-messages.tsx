@@ -1,8 +1,6 @@
 'use client';
 
 import type { UIMessage } from 'ai';
-import { ArrowUpRight, Video } from 'lucide-react';
-import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 
 interface IMessageContentProps {
@@ -24,36 +22,6 @@ function MessageContent({ message }: IMessageContentProps) {
             </p>
           ));
         }
-        if (part.type === 'tool-call') {
-          if (part.toolName === 'showVideo') {
-            return (
-              <div
-                key={index}
-                className="relative overflow-hidden rounded-xl bg-black/10"
-              >
-                <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20">
-                    <Video className="h-5 w-5 text-white" />
-                  </div>
-                </div>
-                <Image
-                  src={part.args.thumbnailUrl}
-                  alt={part.args.title || 'Video thumbnail'}
-                  className="h-[140px] w-full object-cover"
-                />
-                <div className="absolute bottom-3 left-3 flex items-center gap-2">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white">
-                    <ArrowUpRight className="h-4 w-4 text-red-500" />
-                  </div>
-                  <span className="text-xs text-white">
-                    YouTube&apos;s Channel
-                  </span>
-                </div>
-              </div>
-            );
-          }
-        }
-        return null;
       })}
     </div>
   );
@@ -61,9 +29,10 @@ function MessageContent({ message }: IMessageContentProps) {
 
 interface ChatMessagesProps {
   messages: UIMessage[];
+  isLoading: boolean;
 }
 
-export function ChatMessages({ messages }: ChatMessagesProps) {
+export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -113,6 +82,19 @@ export function ChatMessages({ messages }: ChatMessagesProps) {
             }`}
           >
             <MessageContent message={message} />
+            {isLoading && message.role === 'assistant' && (
+              <div className="flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-gray-400 animate-bounce"></div>
+                <div
+                  className="h-2 w-2 rounded-full bg-gray-400 animate-bounce"
+                  style={{ animationDelay: '0.1s' }}
+                ></div>
+                <div
+                  className="h-2 w-2 rounded-full bg-gray-400 animate-bounce"
+                  style={{ animationDelay: '0.2s' }}
+                ></div>
+              </div>
+            )}
           </div>
         </div>
       ))}

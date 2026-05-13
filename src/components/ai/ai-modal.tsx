@@ -100,11 +100,12 @@ export function AIModal({
     'Mudar objetivo',
     'Atualizar informações',
   ];
-  
+
   const actions = suggestedActions || defaultSuggestedActions;
 
   const isFullVariant = variant === 'full';
-  const showWelcomeMessages = isFullVariant && welcomeMessages && messages.length === 0;
+  const showWelcomeMessages =
+    isFullVariant && welcomeMessages && messages.length === 0;
 
   const containerClasses = isFullVariant
     ? 'flex h-screen flex-col bg-white sm:h-[85vh] sm:w-[393px] sm:rounded-2xl sm:overflow-hidden sm:border sm:border-[#f1f1f1]'
@@ -115,7 +116,9 @@ export function AIModal({
     : { height: '85vh', maxHeight: '85vh' };
 
   return (
-    <div className={`fixed inset-0 z-[100] flex items-end sm:items-center justify-center ${isFullVariant ? '' : ''}`}>
+    <div
+      className={`fixed inset-0 z-[100] flex items-end sm:items-center justify-center ${isFullVariant ? '' : ''}`}
+    >
       {!isFullVariant && (
         <div
           className="absolute inset-0 bg-black/50"
@@ -173,7 +176,10 @@ export function AIModal({
                 )}
               </div>
             ) : (
-              <ChatMessages messages={messages} />
+              <ChatMessages
+                isLoading={status === 'submitted'}
+                messages={messages}
+              />
             )}
           </div>
           <div className="mt-4 min-h-[48px]">
