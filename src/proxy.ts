@@ -10,7 +10,7 @@ export interface UserProfile {
 }
 
 export async function hasUserCompletedOnboarding(
-  userId: string
+  userId: string,
 ): Promise<boolean> {
   const response = await getUsersUserId(userId, {
     fetchOptions: {
@@ -18,7 +18,7 @@ export async function hasUserCompletedOnboarding(
     },
   });
 
-  if (response.data) {
+  if (response.status === 200 && response.data) {
     const user = response.data;
     return (
       user.height !== null &&
