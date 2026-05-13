@@ -1,3 +1,4 @@
+import { cookies } from 'next/headers';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
@@ -21,17 +22,15 @@ export default async function proxy(request: NextRequest) {
   const session = await authClient.getSession({
     fetchOptions: {
       headers: {
-        cookie: request.headers.get('cookie') || '',
+        cookie: (await cookies()).toString(),
       },
     },
   });
 
   if (!session.data) {
-    // No session, redirect to login
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
-  // Check if user has complete profile
   const user = session.data.user;
 
   if (!user) {
@@ -45,7 +44,6 @@ export default async function proxy(request: NextRequest) {
     user.bodyFatPercentage !== null;
 
   if (!hasCompleteProfile) {
-    // User profile is incomplete, redirect to onboarding
     return NextResponse.redirect(new URL('/onboarding', request.url));
   }
 
