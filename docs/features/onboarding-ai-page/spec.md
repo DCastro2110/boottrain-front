@@ -50,7 +50,7 @@ A mandatory onboarding flow for new users who lack essential body metrics (weigh
 ### Architecture
 
 1. **Onboarding Page** (`src/app/onboarding/page.tsx`): Server component that checks session and renders the AI chat interface
-2. **Proxy/Validation** (`src/lib/onboarding-proxy.ts`): Validates user profile completeness
+2. **Proxy/Validation** (`src/proxy.ts`): Validates user profile completeness using Next.js utilities
 3. **Data Update**: After AI conversation collects data, call `putUsersUserId` API to update user profile
 
 ### Data Flow
