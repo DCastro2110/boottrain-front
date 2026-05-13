@@ -54,20 +54,22 @@ A mandatory onboarding flow for new users who lack essential body metrics (weigh
 ### Architecture
 
 1. **Onboarding Page** (`src/app/onboarding/page.tsx`): Server component that checks session and renders the AI chat interface
-2. **Proxy/Validation** (`src/proxy.ts`): Validates user profile completeness using Next.js utilities
-3. **Data Update**: After AI conversation collects data, call `putUsersUserId` API to update user profile
+2. **Proxy** (`src/proxy.ts`): Next.js proxy (export default) that intercepts requests, validates session and profile completeness, and redirects incomplete profiles to `/onboarding`
+3. **AI Chat**: AI collects user data and saves directly to profile via `/ai` endpoint
 
 ### Data Flow
 
-1. User logs in → session created → goes to home page
-2. User with incomplete profile manually navigates to `/onboarding` (or we can add a link in the UI for incomplete profiles - but this is out of scope per requirements)
-3. User accesses `/onboarding`
-4. Proxy checks: Does user have weight, height, age, AND body fat percentage?
-   - If YES → redirect to `/` (user already completed onboarding)
-   - If NO → show onboarding page
-5. On `/onboarding`: AI chat collects missing information
-6. AI collects all data → calls `putUsersUserId` to update profile
-7. User redirected to home
+1. User accesses any protected route
+2. Proxy checks session and profile completeness
+3. If no session → redirect to `/login`
+4. If session but incomplete profile → redirect to `/onboarding`
+5. User completes onboarding via AI chat
+6. AI saves data directly to profile via `/ai` endpoint
+7. User redirected to home page
+
+### Data Update
+
+After AI conversation collects data, the AI saves it directly to the user profile via the `/ai` endpoint. No explicit `putUsersUserId` call needed from the client.
 
 ### Key Components
 
