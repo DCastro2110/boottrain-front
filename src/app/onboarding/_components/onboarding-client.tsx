@@ -19,9 +19,8 @@ export function OnboardingClient() {
       api: `${process.env.NEXT_PUBLIC_API_BASE_URL}/ai`,
       credentials: 'include',
     }),
-    onFinish: (message) => {
-      // AI handles saving data to profile via /ai endpoint
-      // Check for completion indication in AI response
+    onFinish: (messages) => {
+      const message = messages.message;
       if (message.role === 'assistant') {
         const text = message.parts
           .filter((p) => p.type === 'text')
@@ -91,14 +90,16 @@ export function OnboardingClient() {
               {/* Welcome messages from design */}
               <div className="flex justify-start">
                 <div className="max-w-[85%] rounded-2xl bg-[#f1f1f1] px-4 py-3">
-                  <p className="text-sm text-gray-900">Bem-vindo ao FIT.AI! 🎉</p>
+                  <p className="text-sm text-gray-900">
+                    Bem-vindo ao FIT.AI! 🎉
+                  </p>
                 </div>
               </div>
               <div className="flex justify-start">
                 <div className="max-w-[85%] rounded-2xl bg-[#f1f1f1] px-4 py-3">
                   <p className="text-sm text-gray-900">
-                    O app que vai transformar a forma como você treina. Aqui você
-                    monta seu plano de treino personalizado, acompanha sua
+                    O app que vai transformar a forma como você treina. Aqui
+                    você monta seu plano de treino personalizado, acompanha sua
                     evolução com estatísticas detalhadas e conta com uma IA
                     disponível 24h para te guiar em cada exercício.
                   </p>
