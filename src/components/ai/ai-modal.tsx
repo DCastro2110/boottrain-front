@@ -3,27 +3,32 @@
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import { Sparkles, X } from 'lucide-react';
-import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 import { ChatInput } from '@/components/ai/chat-input';
 import { ChatMessages } from '@/components/ai/chat-messages';
 import { SuggestedChips } from '@/components/ai/suggested-chips';
 
-interface IAIModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+export interface IAIModalProps {
+  isOpen?: boolean;
+  onClose?: () => void;
   initialMessage?: string;
+  variant?: 'modal' | 'full';
+  welcomeMessages?: string[];
+  suggestedActions?: string[];
+  onFinish?: (text: string) => boolean;
 }
 
 export function AIModal({
-  isOpen,
+  isOpen = true,
   onClose,
   initialMessage: initialMessageProp,
+  variant = 'modal',
+  welcomeMessages,
+  suggestedActions,
+  onFinish,
 }: IAIModalProps) {
-  const searchParams = useSearchParams();
-  const initialMessageFromParams = searchParams.get('initialMessage') || '';
-  const initialMessage = initialMessageProp || initialMessageFromParams;
+  const initialMessage = initialMessageProp || '';
   const [input, setInput] = useState('');
   const prevOpenRef = useRef(false);
   const hasInitialMessageSentRef = useRef(false);
@@ -33,11 +38,23 @@ export function AIModal({
       api: `${process.env.NEXT_PUBLIC_API_BASE_URL}/ai`,
       credentials: 'include',
     }),
+    onFinish: (messages) => {
+      if (!onFinish) return;
+      const message = messages.message;
+      if (message.role === 'assistant') {
+        const text = message.parts
+          .filter((p) => p.type === 'text')
+          .map((p) => p.text)
+          .join('');
+        onFinish(text);
+      }
+    },
   });
 
   useEffect(() => {
     if (prevOpenRef.current && !isOpen) {
       setInput('');
+      hasInitialMessageSentRef.current = false;
     }
     prevOpenRef.current = isOpen;
   }, [isOpen]);
@@ -72,23 +89,41 @@ export function AIModal({
     setInput(e.target.value);
   };
 
-  const suggestedActions = [
+  const handleStartChat = () => {
+    if (status === 'ready' && initialMessage) {
+      sendMessage({ text: initialMessage });
+    }
+  };
+
+  const defaultSuggestedActions = [
     'Alterar plano de treino',
     'Mudar objetivo',
     'Atualizar informações',
   ];
+  
+  const actions = suggestedActions || defaultSuggestedActions;
+
+  const isFullVariant = variant === 'full';
+  const showWelcomeMessages = isFullVariant && welcomeMessages && messages.length === 0;
+
+  const containerClasses = isFullVariant
+    ? 'flex h-screen flex-col bg-white sm:h-[85vh] sm:w-[393px] sm:rounded-2xl sm:overflow-hidden sm:border sm:border-[#f1f1f1]'
+    : 'relative flex w-full flex-col bg-white sm:w-[393px] sm:rounded-2xl sm:overflow-hidden';
+
+  const containerStyles = isFullVariant
+    ? undefined
+    : { height: '85vh', maxHeight: '85vh' };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center">
-      <div
-        className="absolute inset-0 bg-black/50"
-        onClick={onClose}
-        aria-hidden="true"
-      />
-      <div
-        className="relative flex w-full flex-col bg-white sm:w-[393px] sm:rounded-2xl sm:overflow-hidden"
-        style={{ height: '85vh', maxHeight: '85vh' }}
-      >
+    <div className={`fixed inset-0 z-[100] flex items-end sm:items-center justify-center ${isFullVariant ? '' : ''}`}>
+      {!isFullVariant && (
+        <div
+          className="absolute inset-0 bg-black/50"
+          onClick={onClose}
+          aria-hidden="true"
+        />
+      )}
+      <div className={containerClasses} style={containerStyles}>
         <div className="flex h-14 shrink-0 items-center justify-between border-b border-[#f1f1f1] px-5">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#2b54ff]/10">
@@ -104,22 +139,47 @@ export function AIModal({
               </div>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className="flex h-10 w-10 items-center justify-center rounded-xl text-gray-600 transition-colors hover:bg-gray-100"
-          >
-            <X className="h-5 w-5" />
-          </button>
+          {onClose && (
+            <button
+              onClick={onClose}
+              className="flex h-10 w-10 items-center justify-center rounded-xl text-gray-600 transition-colors hover:bg-gray-100"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          )}
         </div>
 
         <div className="flex flex-1 flex-col overflow-hidden px-5 pt-6">
           <div className="flex-1 overflow-y-auto">
-            <ChatMessages messages={messages} />
+            {showWelcomeMessages ? (
+              <div className="flex flex-col gap-3">
+                {welcomeMessages.map((msg, index) => (
+                  <div key={index} className="flex justify-start">
+                    <div className="max-w-[85%] rounded-2xl bg-[#f1f1f1] px-4 py-3">
+                      <p className="text-sm text-gray-900">{msg}</p>
+                    </div>
+                  </div>
+                ))}
+                {initialMessage && (
+                  <div className="mt-4 flex justify-start">
+                    <button
+                      onClick={handleStartChat}
+                      disabled={status !== 'ready'}
+                      className="rounded-full bg-[#2b54ff] px-6 py-2.5 text-sm font-semibold text-white transition-opacity hover:bg-[#2b54ff]/90 disabled:opacity-50"
+                    >
+                      Começar
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <ChatMessages messages={messages} />
+            )}
           </div>
           <div className="mt-4 min-h-[48px]">
-            {messages.length === 0 && (
+            {messages.length === 0 && !showWelcomeMessages && (
               <SuggestedChips
-                chips={suggestedActions}
+                chips={actions}
                 onChipClick={(text) => {
                   setInput(text);
                 }}
