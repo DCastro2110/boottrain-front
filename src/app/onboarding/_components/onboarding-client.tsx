@@ -3,6 +3,7 @@
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import { ArrowUp,Sparkles } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { SuggestedChips } from '@/components/ai/suggested-chips';
@@ -11,7 +12,10 @@ interface OnboardingClientProps {
   userId: string;
 }
 
+const INITIAL_MESSAGE = 'Vamos configurar meu perfil';
+
 export function OnboardingClient({ userId: _userId }: OnboardingClientProps) {
+  const router = useRouter();
   const [input, setInput] = useState('');
 
   const { messages, sendMessage, status } = useChat({
@@ -19,6 +23,26 @@ export function OnboardingClient({ userId: _userId }: OnboardingClientProps) {
       api: `${process.env.NEXT_PUBLIC_API_BASE_URL}/ai`,
       credentials: 'include',
     }),
+    onFinish: (message) => {
+      // AI handles saving data to profile via /ai endpoint
+      // Check for completion indication in AI response
+      if (message.role === 'assistant') {
+        const text = message.parts
+          .filter((p) => p.type === 'text')
+          .map((p) => p.text)
+          .join('');
+
+        // Redirect after AI indicates onboarding completion
+        if (
+          text.includes('perfil configurado') ||
+          text.includes('configuração concluída') ||
+          text.includes('tudo pronto') ||
+          text.includes('pronto para começar')
+        ) {
+          router.push('/');
+        }
+      }
+    },
   });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -30,10 +54,16 @@ export function OnboardingClient({ userId: _userId }: OnboardingClientProps) {
     }
   };
 
+  const handleStartOnboarding = () => {
+    if (status === 'ready') {
+      sendMessage({ text: INITIAL_MESSAGE });
+    }
+  };
+
   const suggestedActions = [
-    'Vamos configurar meu perfil',
-    'Quero começar',
-    'Configurar agora',
+    'Alterar plano de treino',
+    'Mudar objetivo',
+    'Atualizar informações',
   ];
 
   return (
@@ -93,6 +123,17 @@ export function OnboardingClient({ userId: _userId }: OnboardingClientProps) {
                   </p>
                 </div>
               </div>
+
+              {/* Start Button */}
+              <div className="mt-4 flex justify-start">
+                <button
+                  onClick={handleStartOnboarding}
+                  disabled={status !== 'ready'}
+                  className="rounded-full bg-[#2b54ff] px-6 py-2.5 text-sm font-semibold text-white transition-opacity hover:bg-[#2b54ff]/90 disabled:opacity-50"
+                >
+                  Começar
+                </button>
+              </div>
             </div>
           ) : (
             <div className="flex flex-col gap-3">
@@ -108,7 +149,12 @@ export function OnboardingClient({ userId: _userId }: OnboardingClientProps) {
                         : 'bg-[#f1f1f1] text-gray-900'
                     }`}
                   >
-                    <p className="text-sm">{message.parts[0]?.type === 'text' ? message.parts[0].text : ''}</p>
+                    <p className="text-sm">
+                      {message.parts
+                        .filter((p) => p.type === 'text')
+                        .map((p) => p.text)
+                        .join('')}
+                    </p>
                   </div>
                 </div>
               ))}
