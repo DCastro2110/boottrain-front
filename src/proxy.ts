@@ -1,6 +1,8 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
+import { authClient } from '@/lib/auth-client';
+
 export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -15,44 +17,36 @@ export default async function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Get session cookie
-  const sessionCookie = request.cookies.get('better-auth.session_token');
+  // Get session using better-auth client
+  const session = await authClient.getSession({
+    fetchOptions: {
+      headers: {
+        cookie: request.headers.get('cookie') || '',
+      },
+    },
+  });
 
-  if (!sessionCookie) {
+  if (!session.data) {
     // No session, redirect to login
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
   // Check if user has complete profile
-  // Make API call to check user profile data
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL!;
-  const checkUrl = `${baseUrl}/users/me`;
+  const user = session.data.user;
 
-  try {
-    const response = await fetch(checkUrl, {
-      headers: {
-        Cookie: `better-auth.session_token=${sessionCookie.value}`,
-      },
-      credentials: 'include',
-    });
+  if (!user) {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
 
-    if (response.ok) {
-      const user = await response.json();
+  const hasCompleteProfile =
+    user.height !== null &&
+    user.weight !== null &&
+    user.age !== null &&
+    user.bodyFatPercentage !== null;
 
-      const hasCompleteProfile =
-        user.height !== null &&
-        user.weight !== null &&
-        user.age !== null &&
-        user.bodyFatPercentage !== null;
-
-      if (!hasCompleteProfile) {
-        // User profile is incomplete, redirect to onboarding
-        return NextResponse.redirect(new URL('/onboarding', request.url));
-      }
-    }
-  } catch {
-    // If API call fails, allow request to continue
-    // The page will handle the error
+  if (!hasCompleteProfile) {
+    // User profile is incomplete, redirect to onboarding
+    return NextResponse.redirect(new URL('/onboarding', request.url));
   }
 
   return NextResponse.next();
