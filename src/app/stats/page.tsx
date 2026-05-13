@@ -99,14 +99,10 @@ export default async function StatsPage() {
           {/* Consistency Section */}
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-black">
-                Consistência
-              </h2>
+              <h2 className="text-lg font-semibold text-black">Consistência</h2>
               <div className="flex items-center gap-2 rounded-full border border-[#f1f1f1] px-4 py-2">
                 <Calendar className="h-4 w-4 text-black" />
-                <span className="text-sm font-semibold text-black">
-                  Anual
-                </span>
+                <span className="text-sm font-semibold text-black">Anual</span>
               </div>
             </div>
 

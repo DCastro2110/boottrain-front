@@ -48,7 +48,9 @@ export function PeriodConsistencyCard({
     if (!active) return 'bg-[#f1f1f1]';
 
     // Alternate between primary blue and light blue for variety like in design
-    return (monthIndex + dayOfMonth) % 3 === 0 ? 'bg-[#d5dffe]' : 'bg-[#2b54ff]';
+    return (monthIndex + dayOfMonth) % 3 === 0
+      ? 'bg-[#d5dffe]'
+      : 'bg-[#2b54ff]';
   };
 
   return (
@@ -56,9 +58,7 @@ export function PeriodConsistencyCard({
       <div className="flex min-w-max gap-6">
         {months.map((month, mIdx) => (
           <div key={month} className="flex flex-col gap-1.5">
-            <span className="text-xs font-normal text-[#656565]">
-              {month}
-            </span>
+            <span className="text-xs font-normal text-[#656565]">{month}</span>
             <div className="flex gap-1">
               {[0, 1, 2, 3, 4].map((col) => (
                 <div key={col} className="flex flex-col gap-1">

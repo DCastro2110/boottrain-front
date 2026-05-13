@@ -22,7 +22,7 @@ export function ExerciseCard({ exercise }: ExerciseCardProps) {
           <button
             onClick={() =>
               openAIModal(
-                `Qual é a forma correta para o exercício ${exercise.name}?`
+                `Qual é a forma correta para o exercício ${exercise.name}?`,
               )
             }
             className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#2b54ff]/10 text-[#2b54ff] transition-colors hover:bg-[#2b54ff]/20"

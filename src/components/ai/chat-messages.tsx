@@ -1,7 +1,63 @@
 'use client';
 
 import type { UIMessage } from 'ai';
+import { ArrowUpRight, Video } from 'lucide-react';
+import Image from 'next/image';
 import { useEffect, useRef } from 'react';
+
+interface IMessageContentProps {
+  message: UIMessage;
+}
+
+function MessageContent({ message }: IMessageContentProps) {
+  return (
+    <div className="flex flex-col gap-3">
+      {message.parts.map((part, index) => {
+        if (part.type === 'text') {
+          const paragraphs = part.text.split('\n\n');
+          return paragraphs.map((text, pIndex) => (
+            <p
+              key={`${index}-${pIndex}`}
+              className="text-sm leading-relaxed whitespace-pre-wrap"
+            >
+              {text}
+            </p>
+          ));
+        }
+        if (part.type === 'tool-call') {
+          if (part.toolName === 'showVideo') {
+            return (
+              <div
+                key={index}
+                className="relative overflow-hidden rounded-xl bg-black/10"
+              >
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20">
+                    <Video className="h-5 w-5 text-white" />
+                  </div>
+                </div>
+                <Image
+                  src={part.args.thumbnailUrl}
+                  alt={part.args.title || 'Video thumbnail'}
+                  className="h-[140px] w-full object-cover"
+                />
+                <div className="absolute bottom-3 left-3 flex items-center gap-2">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white">
+                    <ArrowUpRight className="h-4 w-4 text-red-500" />
+                  </div>
+                  <span className="text-xs text-white">
+                    YouTube&apos;s Channel
+                  </span>
+                </div>
+              </div>
+            );
+          }
+        }
+        return null;
+      })}
+    </div>
+  );
+}
 
 interface ChatMessagesProps {
   messages: UIMessage[];
@@ -13,8 +69,6 @@ export function ChatMessages({ messages }: ChatMessagesProps) {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
-
-  console.log(messages);
 
   if (messages.length === 0) {
     return (
@@ -58,11 +112,7 @@ export function ChatMessages({ messages }: ChatMessagesProps) {
                 : 'bg-[#f1f1f1] text-gray-900'
             }`}
           >
-            {message.parts.map((part, index) => (
-              <p key={index} className="text-sm leading-relaxed">
-                {part.type === 'text' ? part.text : null}
-              </p>
-            ))}
+            <MessageContent message={message} />
           </div>
         </div>
       ))}

@@ -8,7 +8,11 @@ interface IErrorPageProps {
   backLabel: string;
 }
 
-export function ErrorContainer({ title, backHref, backLabel }: IErrorPageProps) {
+export function ErrorContainer({
+  title,
+  backHref,
+  backLabel,
+}: IErrorPageProps) {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-white p-5 text-center">
       <h1 className="mb-6 text-xl font-bold text-gray-900">{title}</h1>
