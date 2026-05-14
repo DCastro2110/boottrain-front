@@ -33,7 +33,7 @@ export function AIModal({
   const prevOpenRef = useRef(false);
   const hasInitialMessageSentRef = useRef(false);
 
-  const { messages, sendMessage, status, error, setMessages } = useChat({
+  const { messages, sendMessage, status, error, setMessages, stop } = useChat({
     transport: new DefaultChatTransport({
       api: `${process.env.NEXT_PUBLIC_API_BASE_URL}/ai`,
       credentials: 'include',
@@ -120,6 +120,10 @@ export function AIModal({
     ? undefined
     : { height: '85vh', maxHeight: '85vh' };
 
+  const handleStop = () => {
+    stop();
+  };
+
   return (
     <div
       className={`fixed inset-0 z-[100] flex items-end sm:items-center justify-center ${isFullVariant ? '' : ''}`}
@@ -181,7 +185,7 @@ export function AIModal({
               handleInputChange={handleInputChange}
               handleSubmit={handleSubmit}
               isStreaming={isStreaming}
-              isError={!!error}
+              onStop={handleStop}
             />
           </div>
         </div>
