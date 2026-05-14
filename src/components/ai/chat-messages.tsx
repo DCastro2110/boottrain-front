@@ -82,22 +82,22 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
             }`}
           >
             <MessageContent message={message} />
-            {isLoading && message.role === 'assistant' && (
-              <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-gray-400 animate-bounce"></div>
-                <div
-                  className="h-2 w-2 rounded-full bg-gray-400 animate-bounce"
-                  style={{ animationDelay: '0.1s' }}
-                ></div>
-                <div
-                  className="h-2 w-2 rounded-full bg-gray-400 animate-bounce"
-                  style={{ animationDelay: '0.2s' }}
-                ></div>
-              </div>
-            )}
           </div>
         </div>
       ))}
+      {isLoading && (
+        <div className="flex items-center gap-2 px-4 py-3">
+          <div className="h-2 w-2 rounded-full bg-gray-400 animate-bounce"></div>
+          <div
+            className="h-2 w-2 rounded-full bg-gray-400 animate-bounce"
+            style={{ animationDelay: '0.1s' }}
+          ></div>
+          <div
+            className="h-2 w-2 rounded-full bg-gray-400 animate-bounce"
+            style={{ animationDelay: '0.2s' }}
+          ></div>
+        </div>
+      )}
       <div ref={messagesEndRef} />
     </div>
   );

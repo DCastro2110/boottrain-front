@@ -33,11 +33,12 @@ export function AIModal({
   const prevOpenRef = useRef(false);
   const hasInitialMessageSentRef = useRef(false);
 
-  const { messages, sendMessage, status, error } = useChat({
+  const { messages, sendMessage, status, error, setMessages } = useChat({
     transport: new DefaultChatTransport({
       api: `${process.env.NEXT_PUBLIC_API_BASE_URL}/ai`,
       credentials: 'include',
     }),
+
     onFinish: (messages) => {
       if (!onFinish) return;
       const message = messages.message;
@@ -50,6 +51,18 @@ export function AIModal({
       }
     },
   });
+
+  useEffect(() => {
+    if (welcomeMessages && isOpen) {
+      setMessages(
+        welcomeMessages.map((msg) => ({
+          id: crypto.randomUUID(),
+          role: 'assistant',
+          parts: [{ type: 'text', text: msg }],
+        })),
+      );
+    }
+  }, [setMessages, isOpen, welcomeMessages]);
 
   useEffect(() => {
     if (prevOpenRef.current && !isOpen) {
@@ -87,12 +100,6 @@ export function AIModal({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
-  };
-
-  const handleStartChat = () => {
-    if (status === 'ready' && initialMessage) {
-      sendMessage({ text: initialMessage });
-    }
   };
 
   const defaultSuggestedActions = [
@@ -154,33 +161,10 @@ export function AIModal({
 
         <div className="flex flex-1 flex-col overflow-hidden px-5 pt-6">
           <div className="flex-1 overflow-y-auto">
-            {showWelcomeMessages ? (
-              <div className="flex flex-col gap-3">
-                {welcomeMessages.map((msg, index) => (
-                  <div key={index} className="flex justify-start">
-                    <div className="max-w-[85%] rounded-2xl bg-[#f1f1f1] px-4 py-3">
-                      <p className="text-sm text-gray-900">{msg}</p>
-                    </div>
-                  </div>
-                ))}
-                {initialMessage && (
-                  <div className="mt-4 flex justify-start">
-                    <button
-                      onClick={handleStartChat}
-                      disabled={status !== 'ready'}
-                      className="rounded-full bg-[#2b54ff] px-6 py-2.5 text-sm font-semibold text-white transition-opacity hover:bg-[#2b54ff]/90 disabled:opacity-50"
-                    >
-                      Começar
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <ChatMessages
-                isLoading={status === 'submitted'}
-                messages={messages}
-              />
-            )}
+            <ChatMessages
+              isLoading={status === 'submitted'}
+              messages={messages}
+            />
           </div>
           <div className="mt-4 min-h-[48px]">
             {messages.length === 0 && !showWelcomeMessages && (
