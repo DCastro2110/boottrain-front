@@ -27,12 +27,41 @@ function MessageContent({ message }: IMessageContentProps) {
   );
 }
 
+interface IErrorMessageProps {
+  message: UIMessage;
+}
+
+function ErrorMessage({ message }: IErrorMessageProps) {
+  return (
+    <div className="mt-2 flex items-start gap-2">
+      <div className="flex flex-col gap-1">
+        <div className="flex items-center gap-2">
+          <div className="h-2 w-2 rounded-full bg-red-500" />
+          <span className="text-xs font-medium text-red-600">
+            Erro ao enviar mensagem! Tente novamente.
+          </span>
+        </div>
+        <div className="max-w-[85%] rounded-2xl rounded-tl-sm border border-red-200 bg-red-50 px-4 py-3">
+          <p className="text-sm text-gray-900">
+            {message.parts[0]?.type === 'text' ? message.parts[0].text : ''}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 interface ChatMessagesProps {
   messages: UIMessage[];
   isLoading: boolean;
+  isError?: boolean;
 }
 
-export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
+export function ChatMessages({
+  messages,
+  isLoading,
+  isError,
+}: ChatMessagesProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -67,24 +96,32 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
     );
   }
 
+  const lastUserMessage = messages.filter((m) => m.role === 'user').pop();
+
   return (
     <div className="flex flex-1 flex-col gap-4 overflow-y-auto px-5 py-6">
-      {messages.map((message) => (
-        <div
-          key={message.id}
-          className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-        >
-          <div
-            className={`max-w-[85%] rounded-2xl px-4 py-3 ${
-              message.role === 'user'
-                ? 'bg-[#2b54ff] text-white'
-                : 'bg-[#f1f1f1] text-gray-900'
-            }`}
-          >
-            <MessageContent message={message} />
+      {messages.map((message) => {
+        const isLastUserMessage =
+          message.role === 'user' && message === lastUserMessage;
+        return (
+          <div key={message.id}>
+            <div
+              className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            >
+              <div
+                className={`max-w-[85%] rounded-2xl px-4 py-3 ${
+                  message.role === 'user'
+                    ? 'bg-[#2b54ff] text-white'
+                    : 'bg-[#f1f1f1] text-gray-900'
+                }`}
+              >
+                <MessageContent message={message} />
+              </div>
+            </div>
+            {isError && isLastUserMessage && <ErrorMessage message={message} />}
           </div>
-        </div>
-      ))}
+        );
+      })}
       {isLoading && (
         <div className="flex items-center gap-2 px-4 py-3">
           <div className="h-2 w-2 rounded-full bg-gray-400 animate-bounce"></div>

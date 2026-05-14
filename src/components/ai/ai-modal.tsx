@@ -52,6 +52,8 @@ export function AIModal({
     },
   });
 
+  const isStreaming = status === 'streaming' || status === 'submitted';
+
   useEffect(() => {
     if (welcomeMessages && isOpen) {
       setMessages(
@@ -85,14 +87,10 @@ export function AIModal({
 
   if (!isOpen) return null;
 
-  if (error) {
-    console.error('Error in chat transport:', error);
-  }
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const trimmed = input.trim();
-    if (trimmed && status === 'ready') {
+    if ((trimmed && status !== 'streaming') || status === 'submitted') {
       sendMessage({ text: trimmed });
       setInput('');
     }
@@ -164,6 +162,7 @@ export function AIModal({
             <ChatMessages
               isLoading={status === 'submitted'}
               messages={messages}
+              isError={!!error}
             />
           </div>
           <div className="mt-4 min-h-[48px]">
@@ -181,7 +180,8 @@ export function AIModal({
               input={input}
               handleInputChange={handleInputChange}
               handleSubmit={handleSubmit}
-              isLoading={status !== 'ready'}
+              isStreaming={isStreaming}
+              isError={!!error}
             />
           </div>
         </div>

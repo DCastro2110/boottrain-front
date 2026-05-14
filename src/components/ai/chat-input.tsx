@@ -6,14 +6,15 @@ interface ChatInputProps {
   input: string;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  isLoading: boolean;
+  isStreaming: boolean;
+  isError?: boolean;
 }
 
 export function ChatInput({
   input,
   handleInputChange,
   handleSubmit,
-  isLoading,
+  isStreaming,
 }: ChatInputProps) {
   return (
     <form
@@ -25,12 +26,12 @@ export function ChatInput({
         value={input}
         onChange={handleInputChange}
         placeholder="Digite sua mensagem"
-        disabled={isLoading}
+        disabled={isStreaming}
         className="flex-1 bg-transparent px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none disabled:opacity-50"
       />
       <button
         type="submit"
-        disabled={isLoading || !input.trim()}
+        disabled={isStreaming || !input.trim()}
         className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#2b54ff] text-white disabled:opacity-50"
       >
         <ArrowUp className="h-5 w-5" />
