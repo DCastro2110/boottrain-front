@@ -107,20 +107,20 @@ export function ConsistencyBoard({
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
-        <span className="text-[18px] font-semibold text-black">
+        <span className="text-base font-semibold text-black sm:text-lg">
           Consistência
         </span>
-        <Link href="/stats" className="text-[12px] text-[#2b54ff]">
+        <Link href="/stats" className="text-xs text-[#2b54ff] sm:text-sm">
           Stats
         </Link>
       </div>
 
       <div className="flex items-center justify-between gap-3">
-        <div className="flex flex-1 gap-3 rounded-xl border border-[#f1f1f1] p-5">
+        <div className="flex flex-1 gap-2 rounded-xl border border-[#f1f1f1] p-4 sm:gap-3 sm:p-5">
           {sortedConsistency.map((dayInfo) => (
             <div
               key={dayInfo.day}
-              className="flex flex-col items-center gap-1.5"
+              className="flex flex-col items-center gap-1 sm:gap-1.5"
             >
               <div
                 className={`h-5 w-5 rounded-[6px] ${getStatusColor(dayInfo)} ${
@@ -129,16 +129,16 @@ export function ConsistencyBoard({
                     : ''
                 }`}
               />
-              <span className="text-[12px] font-normal text-[#656565]">
+              <span className="text-xs font-normal text-[#656565] sm:text-sm">
                 {DAY_ABBREVIATIONS[dayInfo.day]}
               </span>
             </div>
           ))}
         </div>
 
-        <div className="flex h-full items-center gap-2 rounded-xl bg-[#f0610014] px-5 py-2">
+        <div className="flex h-full items-center gap-2 rounded-xl bg-[#f0610014] px-3 py-2 sm:px-5">
           <Flame className="h-5 w-5 fill-[#f06100] text-[#f06100]" />
-          <span className="text-[16px] font-semibold text-black">
+          <span className="text-base font-semibold text-black sm:text-lg">
             {fireSequence}
           </span>
         </div>

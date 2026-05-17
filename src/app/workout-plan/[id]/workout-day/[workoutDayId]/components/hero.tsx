@@ -55,7 +55,7 @@ export function Hero({ workoutDay, workoutPlanId, workoutDayId }: HeroProps) {
 
   return (
     <div
-      className="relative flex h-[200px] w-full flex-col justify-between rounded-xl bg-cover bg-center p-5"
+      className="relative flex min-h-48 w-full flex-col justify-between rounded-xl bg-cover bg-center p-4 sm:min-h-52 sm:p-5"
       style={{
         backgroundImage: workoutDay.coverImageUrl
           ? `linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url(${workoutDay.coverImageUrl})`
@@ -65,7 +65,7 @@ export function Hero({ workoutDay, workoutPlanId, workoutDayId }: HeroProps) {
       <div className="absolute inset-0 rounded-xl bg-black/40" />
 
       <div className="relative flex items-center gap-2">
-        <span className="flex items-center gap-1 rounded-full bg-white/20 px-2.5 py-1.5 text-[12px] font-semibold text-white backdrop-blur-md">
+        <span className="flex items-center gap-1 rounded-full bg-white/20 px-2 py-1 text-xs font-semibold text-white backdrop-blur-md sm:text-sm">
           <Calendar className="h-3.5 w-3.5" />
           <span>{weekdayName}</span>
         </span>
@@ -73,19 +73,19 @@ export function Hero({ workoutDay, workoutPlanId, workoutDayId }: HeroProps) {
 
       <div className="relative flex items-end justify-between gap-2">
         <div className="flex flex-col gap-2">
-          <h3 className="text-2xl font-semibold text-white">
+          <h3 className="text-xl font-semibold text-white sm:text-2xl">
             {workoutDay.name}
           </h3>
 
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-1 text-[12px] text-white/70">
+            <div className="flex items-center gap-1 text-xs text-white/70 sm:text-sm">
               <Timer className="h-3.5 w-3.5" />
               <span>
                 {formatDuration(workoutDay.estimatedDurationInSeconds)}
               </span>
             </div>
 
-            <div className="flex items-center gap-1 text-[12px] text-white/70">
+            <div className="flex items-center gap-1 text-xs text-white/70 sm:text-sm">
               <Dumbbell className="h-3.5 w-3.5" />
               <span>
                 {workoutDay.numberOfExercises}{' '}
@@ -107,7 +107,7 @@ export function Hero({ workoutDay, workoutPlanId, workoutDayId }: HeroProps) {
             Iniciar Treino
           </button>
         ) : (
-          <div className="h-10 flex items-center px-4 rounded-full bg-green-500 text-sm font-semibold text-white">
+          <div className="flex h-10 items-center gap-2 rounded-full bg-green-500 px-4 text-sm font-semibold text-white">
             Em andamento
           </div>
         )}

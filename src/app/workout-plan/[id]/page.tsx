@@ -92,8 +92,8 @@ export default async function WorkoutPlanPage({
 
   return (
     <div className="relative flex min-h-screen flex-col items-center bg-white pb-24">
-      <main className="flex w-full max-w-[393px] flex-col items-center">
-        <section className="flex w-full flex-col gap-5 p-5">
+      <main className="flex w-full max-w-6xl flex-col items-center px-4 sm:max-w-3xl md:max-w-5xl lg:max-w-6xl">
+        <section className="flex w-full flex-col gap-5 p-4 sm:p-5">
           <div className="flex h-14 items-center justify-between">
             <Link
               href="/"
@@ -112,8 +112,8 @@ export default async function WorkoutPlanPage({
             <p className="text-sm text-gray-500">{workoutPlan.description}</p>
           </div>
 
-          <div className="flex flex-col gap-4">
-            <h3 className="text-base font-semibold text-gray-900">Treinos</h3>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            <h3 className="col-span-full text-base font-semibold text-gray-900 sm:text-lg">Treinos</h3>
             {workoutPlan.workoutDays.map((day) => {
               const date = getNextDateForWeekday(day.weekDay);
               const weekdayName = getWeekdayName(date);

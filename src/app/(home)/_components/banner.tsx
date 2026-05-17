@@ -6,15 +6,15 @@ interface IBannerProps {
 
 export function Banner({ userName }: IBannerProps) {
   return (
-    <div className="relative flex h-[296px] w-full flex-col justify-between rounded-b-[20px] bg-cover bg-center p-5 pb-10 gap-10 overflow-hidden shadow-sm">
+    <div className="relative flex min-h-72 w-full max-w-6xl flex-col justify-between rounded-b-[20px] bg-cover bg-center p-5 pb-10 gap-10 overflow-hidden shadow-sm sm:min-h-80 lg:min-h-96">
       <div
-        className="absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-center rounded-b-[20px]"
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&q=80')",
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 rounded-b-[20px]" />
 
       {/* Header with logo */}
       <div className="relative flex items-center justify-between">
