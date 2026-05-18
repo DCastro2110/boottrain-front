@@ -92,7 +92,7 @@ export default async function WorkoutPlanPage({
 
   return (
     <div className="relative flex min-h-screen flex-col items-center bg-white pb-24">
-      <main className="flex w-full max-w-6xl flex-col items-center px-4 sm:max-w-3xl md:max-w-5xl lg:max-w-6xl">
+      <main className="container flex w-full flex-col items-center px-4">
         <section className="flex w-full flex-col gap-5 p-4 sm:p-5">
           <div className="flex h-14 items-center justify-between">
             <Link

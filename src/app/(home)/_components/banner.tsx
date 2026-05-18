@@ -6,7 +6,7 @@ interface IBannerProps {
 
 export function Banner({ userName }: IBannerProps) {
   return (
-    <div className="relative flex min-h-72 w-full max-w-6xl flex-col justify-between rounded-b-[20px] bg-cover bg-center p-5 pb-10 gap-10 overflow-hidden shadow-sm sm:min-h-80 lg:min-h-96">
+    <div className="container relative flex min-h-72 w-full flex-col justify-between rounded-b-[20px] bg-cover bg-center p-5 pb-10 gap-10 overflow-hidden shadow-sm sm:min-h-80 lg:min-h-96">
       <div
         className="absolute inset-0 bg-cover bg-center rounded-b-[20px]"
         style={{

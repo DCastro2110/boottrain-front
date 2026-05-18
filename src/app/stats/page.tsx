@@ -52,7 +52,7 @@ export default async function StatsPage() {
   return (
     <div className="relative flex min-h-screen flex-col items-center bg-white pb-24">
       {/* Main Container */}
-      <main className="flex w-full max-w-6xl flex-col items-center px-4 sm:max-w-3xl md:max-w-5xl lg:max-w-6xl">
+      <main className="container flex w-full flex-col items-center px-4">
         {/* Header */}
         <header className="flex h-14 w-full items-center px-4 sm:px-5">
           <span className="font-anton text-lg text-black sm:text-xl md:text-2xl">Fit.ai</span>

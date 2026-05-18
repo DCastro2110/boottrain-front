@@ -35,14 +35,12 @@ export default async function HomePage() {
   return (
     <div className="relative min-h-screen bg-white pb-24">
       {/* Banner Section */}
-      <div className="flex justify-center">
-        <Banner userName={session.data?.user?.name || 'Paulo'} />
-      </div>
+      <Banner userName={session.data?.user?.name || 'Paulo'} />
 
       {/* Main Content */}
-      <main className="flex flex-col items-center">
+      <main className="container flex w-full flex-col items-center px-4">
         {/* Consistency Section */}
-        <div className="w-full max-w-6xl px-4 pt-5 sm:px-6">
+        <div className="w-full pt-5">
           <ConsistencyBoard
             consistency={homeData.weekConsistency}
             fireSequence={homeData.fireSequence}
@@ -50,7 +48,7 @@ export default async function HomePage() {
         </div>
 
         {/* Treino de Hoje Section */}
-        <div className="w-full max-w-6xl px-4 pt-5 sm:px-6">
+        <div className="w-full pt-5">
           <TodayWorkout todayWorkoutDay={homeData.todayWorkoutDay} />
         </div>
       </main>
