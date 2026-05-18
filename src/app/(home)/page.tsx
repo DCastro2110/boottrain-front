@@ -33,12 +33,12 @@ export default async function HomePage() {
   }
 
   return (
-    <div className="relative min-h-screen bg-white pb-24">
+    <div className="relative min-h-screen bg-white pb-24 container justify-center mx-auto">
       {/* Banner Section */}
       <Banner userName={session.data?.user?.name || 'Paulo'} />
 
       {/* Main Content */}
-      <main className="container flex w-full flex-col items-center px-4">
+      <main className="flex w-full flex-col items-center px-4">
         {/* Consistency Section */}
         <div className="w-full pt-5">
           <ConsistencyBoard
