@@ -11,23 +11,19 @@ import { finishWorkoutAction } from '../_actions';
 interface FinishButtonProps {
   workoutPlanId: string;
   workoutDayId: string;
-  sessionId: string | null;
-  isCompleted: boolean;
+  sessionId: string;
 }
 
 export function FinishButton({
   workoutPlanId,
   workoutDayId,
   sessionId,
-  isCompleted,
 }: FinishButtonProps) {
-  const [showSuccess, setShowSuccess] = useState(false);
   const { addToast } = useToast();
+  const [showSuccess, setShowSuccess] = useState(false);
   const [isPending, startTransition] = useTransition();
 
-  const handleFinishWorkout = () => {
-    if (!sessionId) return;
-
+  const handleFinish = () => {
     startTransition(async () => {
       try {
         await finishWorkoutAction(workoutPlanId, workoutDayId, sessionId);
@@ -38,12 +34,10 @@ export function FinishButton({
     });
   };
 
-  if (!sessionId || isCompleted) return null;
-
   return (
     <>
       <button
-        onClick={handleFinishWorkout}
+        onClick={handleFinish}
         disabled={isPending}
         className="flex h-12 w-full items-center justify-center rounded-full border border-[#f1f1f1] bg-white text-sm font-semibold text-gray-900 transition-colors hover:bg-gray-50 disabled:opacity-50"
       >

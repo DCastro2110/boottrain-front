@@ -80,6 +80,7 @@ export default async function WorkoutDayPage({
   }
 
   const workoutDay = response.data;
+  const isRunning = workoutDay.workoutSessionId && !workoutDay.isCompleted;
 
   return (
     <div className="relative flex min-h-screen flex-col items-center bg-white pb-24">
@@ -116,14 +117,13 @@ export default async function WorkoutDayPage({
           </div>
 
           {/* Finish Action (gYCIU) */}
-          <div className="mt-4">
+          {isRunning && (
             <FinishButton
               workoutPlanId={id}
               workoutDayId={workoutDayId}
               sessionId={workoutDay.workoutSessionId}
-              isCompleted={workoutDay.isCompleted}
             />
-          </div>
+          )}
         </section>
       </main>
 
