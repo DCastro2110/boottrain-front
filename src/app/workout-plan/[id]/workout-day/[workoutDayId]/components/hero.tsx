@@ -45,8 +45,11 @@ export function Hero({ workoutDay, workoutPlanId, workoutDayId }: HeroProps) {
         addToast('Treino iniciado!', 'success');
         router.refresh();
       } catch (error) {
-        if (error instanceof Error && error.message === 'SESSION_ALREADY_ACTIVE') {
-          addToast('Já existe uma sessão ativa para este treino', 'warning');
+        if (
+          error instanceof Error &&
+          error.message === 'SESSION_ALREADY_ACTIVE'
+        ) {
+          addToast('Já existe uma sessão ativa para este treino', 'info');
         } else {
           addToast('Erro ao iniciar treino', 'error');
         }

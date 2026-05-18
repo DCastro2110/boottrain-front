@@ -121,7 +121,7 @@ export default async function WorkoutDayPage({
             <FinishButton
               workoutPlanId={id}
               workoutDayId={workoutDayId}
-              sessionId={workoutDay.workoutSessionId}
+              sessionId={workoutDay.workoutSessionId!}
             />
           )}
         </section>
