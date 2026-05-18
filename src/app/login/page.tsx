@@ -38,7 +38,7 @@ export default async function LoginPage() {
         </div>
 
         {/* Login Card - 402px wide, positioned at bottom */}
-        <div className="w-full max-w-[402px] rounded-t-[20px] bg-[#2b54ff] px-5 pt-12 pb-10 flex flex-col gap-[60px] items-center">
+        <div className="w-full max-w-100 rounded-t-2xl sm:rounded-b-2xl bg-[#2b54ff] px-5 pt-12 pb-10 flex flex-col gap-12 items-center">
           {/* Hero Text and Button Container */}
           <div className="flex flex-col gap-6 items-center w-full">
             <h1 className="text-[32px] leading-[1.05] text-white font-primary font-semibold text-center">
