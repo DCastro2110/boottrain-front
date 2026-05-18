@@ -34,18 +34,18 @@ export default async function WorkoutPlansPage() {
 
   return (
     <div className="relative flex min-h-screen flex-col items-center bg-white pb-24">
-      <main className="flex w-full max-w-[393px] flex-col items-center">
-        <section className="flex w-full flex-col gap-5 p-5">
+      <main className="container flex w-full flex-col items-center px-4">
+        <section className="flex w-full flex-col gap-5 p-4 sm:p-5">
           <div className="flex h-14 items-center justify-center">
-            <h1 className="text-xl font-bold text-gray-900">Meus Planos</h1>
+            <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">Meus Planos</h1>
           </div>
 
-          <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {plans.map((plan) => (
               <Link
                 key={plan.id}
                 href={`/workout-plan/${plan.id}`}
-                className="flex flex-col gap-3 rounded-xl border border-gray-100 bg-gray-50 p-4 transition-colors hover:bg-gray-100"
+                className="flex min-h-40 flex-col gap-3 rounded-xl border border-gray-100 bg-gray-50 p-4 transition-colors hover:bg-gray-100"
               >
                 <div className="flex items-center justify-between">
                   <h2 className="text-lg font-semibold text-gray-900">

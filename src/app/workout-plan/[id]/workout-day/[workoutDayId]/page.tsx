@@ -85,9 +85,9 @@ export default async function WorkoutDayPage({
   return (
     <div className="relative flex min-h-screen flex-col items-center bg-white pb-24">
       {/* l3fqk - Main Container */}
-      <main className="flex w-full max-w-[393px] flex-col items-center">
+      <main className="container flex w-full flex-col items-center px-4">
         {/* twsDH - Section */}
-        <section className="flex w-full flex-col gap-5 p-5">
+        <section className="flex w-full flex-col gap-5 p-4 sm:p-5">
           {/* Header (U4XXZx) */}
           <div className="flex h-14 items-center justify-between">
             <Link

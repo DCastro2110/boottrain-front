@@ -38,24 +38,24 @@ export default async function ProfilePage() {
 
   return (
     <div className="relative flex min-h-screen flex-col items-center bg-white pb-24">
-      <main className="flex w-full max-w-120 flex-col items-center px-5">
-        <header className="flex h-14 w-full items-center">
-          <span className="font-anton text-[22px] text-black">Fit.ai</span>
+      <main className="container flex w-full flex-col items-center px-4">
+        <header className="flex h-14 w-full items-center px-4 sm:px-5">
+          <span className="font-anton text-lg text-black sm:text-xl md:text-2xl">Fit.ai</span>
         </header>
 
-        <section className="flex w-full flex-col gap-5 px-5">
-          <div className="flex items-center gap-3">
-            <div
-              className="flex h-13 w-13
-             items-center justify-center rounded-full bg-gray-200"
-            >
-              <User className="h-6 w-6 text-gray-500" />
-            </div>
-            <div className="flex flex-col gap-1.5">
+        <section className="flex w-full flex-col gap-5 px-4 sm:px-5">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div
+                className="flex h-13 w-13 items-center justify-center rounded-full bg-gray-200"
+              >
+                <User className="h-6 w-6 text-gray-500" />
+              </div>
               <span className="text-lg font-semibold text-black">
                 {profile.name}
               </span>
             </div>
+            <LogoutButton />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
@@ -64,8 +64,6 @@ export default async function ProfilePage() {
             <StatCard icon={BicepsFlexed} value={profile.bodyFat} unit="Gc" />
             <StatCard icon={User} value={profile.age} unit="Anos" />
           </div>
-
-          <LogoutButton />
         </section>
       </main>
 

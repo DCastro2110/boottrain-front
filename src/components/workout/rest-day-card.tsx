@@ -8,9 +8,9 @@ interface IRestDayCardProps {
 
 export function RestDayCard({ weekday }: IRestDayCardProps) {
   return (
-    <div className="flex h-[110px] w-full flex-col items-center justify-between rounded-xl bg-[#f1f1f1] p-5">
+    <div className="flex min-h-48 w-full flex-col items-center justify-between rounded-xl bg-[#f1f1f1] p-4 sm:min-h-52 sm:p-5">
       <div className="flex items-center justify-center">
-        <span className="flex items-center gap-1 rounded-full bg-[#00000014] px-[10px] py-[5px] text-[12px] font-semibold text-black">
+        <span className="flex items-center gap-1 rounded-full bg-[#00000014] px-2 py-1 text-xs font-semibold text-black sm:text-sm">
           <Calendar className="h-3.5 w-3.5" />
           <span>{weekday}</span>
         </span>
@@ -18,7 +18,7 @@ export function RestDayCard({ weekday }: IRestDayCardProps) {
 
       <div className="flex items-center justify-center gap-2">
         <Zap className="h-5 w-5 fill-[#2b54ff] text-[#2b54ff]" />
-        <h3 className="text-2xl font-semibold text-black">Descanso</h3>
+        <h3 className="text-xl font-semibold text-black sm:text-2xl">Descanso</h3>
       </div>
     </div>
   );

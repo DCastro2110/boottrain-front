@@ -52,16 +52,16 @@ export default async function StatsPage() {
   return (
     <div className="relative flex min-h-screen flex-col items-center bg-white pb-24">
       {/* Main Container */}
-      <main className="flex w-full max-w-[393px] flex-col items-center">
+      <main className="container flex w-full flex-col items-center px-4">
         {/* Header */}
-        <header className="flex h-14 w-full items-center px-5">
-          <span className="font-anton text-[22px] text-black">Fit.ai</span>
+        <header className="flex h-14 w-full items-center px-4 sm:px-5">
+          <span className="font-anton text-lg text-black sm:text-xl md:text-2xl">Fit.ai</span>
         </header>
 
         {/* Section */}
-        <section className="flex w-full flex-col gap-5 px-5">
+        <section className="flex w-full flex-col gap-5 px-4 sm:px-5">
           {/* Banner */}
-          <div className="relative flex min-h-[190px] w-full flex-col items-center justify-center gap-6 overflow-hidden rounded-xl px-5 py-10 shadow-sm">
+          <div className="relative flex min-h-48 w-full flex-col items-center justify-center gap-6 overflow-hidden rounded-xl px-5 py-8 shadow-sm sm:min-h-56 sm:py-10 lg:min-h-64">
             <Image
               src="/images/generated-1777503491583.png"
               alt="Banner"

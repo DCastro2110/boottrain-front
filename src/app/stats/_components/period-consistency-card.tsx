@@ -54,14 +54,14 @@ export function PeriodConsistencyCard({
   };
 
   return (
-    <div className="flex w-full flex-col gap-4 overflow-x-auto rounded-xl border border-[#f1f1f1] p-5">
-      <div className="flex min-w-max gap-6">
+    <div className="flex w-full flex-col gap-3 overflow-x-auto rounded-xl border border-[#f1f1f1] p-3 sm:gap-4 sm:p-5">
+      <div className="flex min-w-max gap-4 sm:gap-6">
         {months.map((month, mIdx) => (
-          <div key={month} className="flex flex-col gap-1.5">
-            <span className="text-xs font-normal text-[#656565]">{month}</span>
-            <div className="flex gap-1">
+          <div key={month} className="flex flex-col gap-1 sm:gap-1.5">
+            <span className="text-xs font-normal text-[#656565] sm:text-sm">{month}</span>
+            <div className="flex gap-0.5 sm:gap-1">
               {[0, 1, 2, 3, 4].map((col) => (
-                <div key={col} className="flex flex-col gap-1">
+                <div key={col} className="flex flex-col gap-0.5 sm:gap-1">
                   {[0, 1, 2, 3, 4, 5, 6].map((row) => {
                     const dayOfMonth = col * 7 + row + 1;
                     const daysInMonth = new Date(
@@ -75,7 +75,7 @@ export function PeriodConsistencyCard({
                       return (
                         <div
                           key={row}
-                          className="h-5 w-5 rounded-sm bg-transparent"
+                          className="h-4 w-4 rounded-sm bg-transparent sm:h-5 sm:w-5"
                         />
                       );
                     }
@@ -83,7 +83,7 @@ export function PeriodConsistencyCard({
                     return (
                       <div
                         key={row}
-                        className={`h-5 w-5 rounded-sm ${getStatusColor(
+                        className={`h-4 w-4 rounded-sm sm:h-5 sm:w-5 ${getStatusColor(
                           mIdx,
                           dayOfMonth,
                         )}`}
@@ -102,16 +102,16 @@ export function PeriodConsistencyCard({
 
 export function PeriodConsistencyCardSkeleton() {
   return (
-    <div className="flex w-full flex-col gap-4 rounded-xl border border-[#f1f1f1] p-5 animate-pulse">
-      <div className="flex gap-6">
+    <div className="flex w-full flex-col gap-3 rounded-xl border border-[#f1f1f1] p-3 sm:gap-4 sm:p-5 animate-pulse">
+      <div className="flex gap-4 sm:gap-6">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="flex flex-col gap-1.5">
-            <div className="h-3 w-8 rounded bg-gray-200" />
-            <div className="flex gap-1">
+          <div key={i} className="flex flex-col gap-1 sm:gap-1.5">
+            <div className="h-3 w-8 rounded bg-gray-200 sm:h-4" />
+            <div className="flex gap-0.5 sm:gap-1">
               {[1, 2, 3].map((j) => (
-                <div key={j} className="flex flex-col gap-1">
+                <div key={j} className="flex flex-col gap-0.5 sm:gap-1">
                   {[1, 2, 3, 4, 5, 6, 7].map((k) => (
-                    <div key={k} className="h-5 w-5 rounded-sm bg-gray-200" />
+                    <div key={k} className="h-4 w-4 rounded-sm bg-gray-200 sm:h-5 sm:w-5" />
                   ))}
                 </div>
               ))}
