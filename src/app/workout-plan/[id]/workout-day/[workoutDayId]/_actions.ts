@@ -17,6 +17,10 @@ export async function startWorkoutAction(
       workoutDayId,
     );
 
+  if (response.status === 409) {
+    throw new Error('SESSION_ALREADY_ACTIVE');
+  }
+
   if (response.status !== 201) {
     throw new Error('Failed to start workout');
   }

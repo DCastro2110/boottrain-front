@@ -121,6 +121,7 @@ export default async function WorkoutDayPage({
               workoutPlanId={id}
               workoutDayId={workoutDayId}
               sessionId={workoutDay.workoutSessionId}
+              isCompleted={workoutDay.isCompleted}
             />
           </div>
         </section>

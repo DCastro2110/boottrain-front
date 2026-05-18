@@ -12,12 +12,14 @@ interface FinishButtonProps {
   workoutPlanId: string;
   workoutDayId: string;
   sessionId: string | null;
+  isCompleted: boolean;
 }
 
 export function FinishButton({
   workoutPlanId,
   workoutDayId,
   sessionId,
+  isCompleted,
 }: FinishButtonProps) {
   const [showSuccess, setShowSuccess] = useState(false);
   const { addToast } = useToast();
@@ -36,7 +38,7 @@ export function FinishButton({
     });
   };
 
-  if (!sessionId) return null;
+  if (!sessionId || isCompleted) return null;
 
   return (
     <>

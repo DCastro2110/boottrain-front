@@ -512,6 +512,7 @@ export type GetWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayId200 = {
   coverImageUrl: string | null;
   /** @nullable */
   workoutSessionId: string | null;
+  isCompleted: boolean;
   workoutExercises: GetWorkoutPlanWorkoutPlanIdWorkoutDaysWorkoutDayId200WorkoutExercisesItem[];
 };
 

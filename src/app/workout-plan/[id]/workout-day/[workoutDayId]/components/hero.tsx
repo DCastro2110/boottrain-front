@@ -1,6 +1,6 @@
 'use client';
 
-import { Calendar, Dumbbell, Loader2, Timer } from 'lucide-react';
+import { Calendar, Check, Dumbbell, Loader2, Timer } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
 
@@ -44,14 +44,18 @@ export function Hero({ workoutDay, workoutPlanId, workoutDayId }: HeroProps) {
         await startWorkoutAction(workoutPlanId, workoutDayId);
         addToast('Treino iniciado!', 'success');
         router.refresh();
-      } catch {
-        addToast('Erro ao iniciar treino', 'error');
+      } catch (error) {
+        if (error instanceof Error && error.message === 'SESSION_ALREADY_ACTIVE') {
+          addToast('Já existe uma sessão ativa para este treino', 'warning');
+        } else {
+          addToast('Erro ao iniciar treino', 'error');
+        }
       }
     });
   };
 
   const weekdayName = getFullWeekdayName(workoutDay.weekDay);
-  const isSessionActive = !!workoutDay.workoutSessionId;
+  const isCompleted = workoutDay.isCompleted;
 
   return (
     <div
@@ -97,7 +101,16 @@ export function Hero({ workoutDay, workoutPlanId, workoutDayId }: HeroProps) {
           </div>
         </div>
 
-        {!isSessionActive ? (
+        {isCompleted ? (
+          <div className="flex h-10 items-center gap-2 rounded-full bg-green-500 px-4 text-sm font-semibold text-white">
+            <Check className="h-4 w-4" />
+            Treino concluído
+          </div>
+        ) : workoutDay.workoutSessionId ? (
+          <div className="flex h-10 items-center gap-2 rounded-full bg-orange-500 px-4 text-sm font-semibold text-white">
+            Treino em andamento
+          </div>
+        ) : (
           <button
             onClick={handleStartWorkout}
             disabled={isPending}
@@ -106,10 +119,6 @@ export function Hero({ workoutDay, workoutPlanId, workoutDayId }: HeroProps) {
             {isPending && <Loader2 className="h-4 w-4 animate-spin" />}
             Iniciar Treino
           </button>
-        ) : (
-          <div className="h-10 flex items-center px-4 rounded-full bg-green-500 text-sm font-semibold text-white">
-            Em andamento
-          </div>
         )}
       </div>
     </div>
