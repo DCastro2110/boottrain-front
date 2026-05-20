@@ -3,6 +3,7 @@
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import { Sparkles, X } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 import { ChatInput } from '@/components/ai/chat-input';
@@ -28,6 +29,7 @@ export function AIModal({
   suggestedActions,
   onFinish,
 }: IAIModalProps) {
+  const router = useRouter();
   const initialMessage = initialMessageProp || '';
   const [input, setInput] = useState('');
   const prevOpenRef = useRef(false);
@@ -53,6 +55,21 @@ export function AIModal({
   });
 
   const isStreaming = status === 'streaming' || status === 'submitted';
+
+  const hasPlanCreatedMessage = messages.some(
+    (msg) =>
+      msg.role === 'assistant' &&
+      msg.parts.some(
+        (part) =>
+          part.type === 'text' &&
+          part.text.toLowerCase().includes('plano criado com sucesso'),
+      ),
+  );
+
+  const handleStartWorkout = () => {
+    onClose?.();
+    router.push('/plano-de-treino');
+  };
 
   useEffect(() => {
     if (welcomeMessages && isOpen) {
@@ -167,6 +184,7 @@ export function AIModal({
               isLoading={status === 'submitted'}
               messages={messages}
               isError={!!error}
+              onStartWorkout={handleStartWorkout}
             />
           </div>
           <div className="mt-4 min-h-[48px]">
@@ -186,6 +204,7 @@ export function AIModal({
               handleSubmit={handleSubmit}
               isStreaming={isStreaming}
               onStop={handleStop}
+              disabled={hasPlanCreatedMessage}
             />
           </div>
         </div>

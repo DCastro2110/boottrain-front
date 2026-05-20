@@ -8,6 +8,7 @@ interface ChatInputProps {
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   isStreaming: boolean;
   onStop?: () => void;
+  disabled?: boolean;
 }
 
 export function ChatInput({
@@ -16,6 +17,7 @@ export function ChatInput({
   handleSubmit,
   isStreaming,
   onStop,
+  disabled,
 }: ChatInputProps) {
   return (
     <form
@@ -26,8 +28,10 @@ export function ChatInput({
         type="text"
         value={input}
         onChange={handleInputChange}
-        placeholder="Digite sua mensagem"
-        disabled={isStreaming}
+        placeholder={
+          disabled ? 'Plano criado com sucesso!' : 'Digite sua mensagem'
+        }
+        disabled={isStreaming || disabled}
         className="flex-1 bg-transparent px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none disabled:opacity-50"
       />
       {isStreaming ? (
@@ -41,7 +45,7 @@ export function ChatInput({
       ) : (
         <button
           type="submit"
-          disabled={isStreaming || !input.trim()}
+          disabled={isStreaming || !input.trim() || disabled}
           className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#2b54ff] text-white disabled:opacity-50"
         >
           <ArrowUp className="h-5 w-5" />

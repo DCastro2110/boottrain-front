@@ -5,9 +5,18 @@ import { useEffect, useRef } from 'react';
 
 interface IMessageContentProps {
   message: UIMessage;
+  onStartWorkout?: () => void;
 }
 
-function MessageContent({ message }: IMessageContentProps) {
+function MessageContent({ message, onStartWorkout }: IMessageContentProps) {
+  const isPlanCreated =
+    message.role === 'assistant' &&
+    message.parts.some(
+      (part) =>
+        part.type === 'text' &&
+        part.text.toLowerCase().includes('plano criado com sucesso'),
+    );
+
   return (
     <div className="flex flex-col gap-3">
       {message.parts.map((part, index) => {
@@ -23,6 +32,14 @@ function MessageContent({ message }: IMessageContentProps) {
           ));
         }
       })}
+      {isPlanCreated && onStartWorkout && (
+        <button
+          onClick={onStartWorkout}
+          className="mt-2 w-full rounded-xl bg-[#2b54ff] py-3 text-sm font-semibold text-white shadow-md shadow-blue-200 transition-all hover:bg-[#1a44ff] active:scale-[0.98]"
+        >
+          Iniciar treino
+        </button>
+      )}
     </div>
   );
 }
@@ -55,12 +72,14 @@ interface ChatMessagesProps {
   messages: UIMessage[];
   isLoading: boolean;
   isError?: boolean;
+  onStartWorkout?: () => void;
 }
 
 export function ChatMessages({
   messages,
   isLoading,
   isError,
+  onStartWorkout,
 }: ChatMessagesProps) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -121,7 +140,10 @@ export function ChatMessages({
                     : 'bg-[#f1f1f1] text-gray-900'
                 }`}
               >
-                <MessageContent message={message} />
+                <MessageContent
+                  message={message}
+                  onStartWorkout={onStartWorkout}
+                />
               </div>
             </div>
             {isError && isLastUserMessage && <ErrorMessage message={message} />}
