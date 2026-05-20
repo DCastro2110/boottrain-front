@@ -110,8 +110,11 @@ export function ConsistencyBoard({
         <span className="text-base font-semibold text-black sm:text-lg">
           Consistência
         </span>
-        <Link href="/stats" className="text-xs text-[#2b54ff] sm:text-sm">
-          Stats
+        <Link
+          href="/estatisticas"
+          className="text-xs text-[#2b54ff] sm:text-sm"
+        >
+          Ver Estatísticas
         </Link>
       </div>
 
