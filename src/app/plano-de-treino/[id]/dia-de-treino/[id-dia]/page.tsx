@@ -17,9 +17,9 @@ export const dynamic = 'force-dynamic';
 export default async function WorkoutDayPage({
   params,
 }: {
-  params: Promise<{ id: string; workoutDayId: string }>;
+  params: Promise<{ id: string; 'id-dia': string }>;
 }) {
-  const { id, workoutDayId } = await params;
+  const { id, 'id-dia': workoutDayId } = await params;
 
   const session = await authClient.getSession({
     fetchOptions: {
@@ -28,7 +28,7 @@ export default async function WorkoutDayPage({
   });
 
   if (!session.data) {
-    redirect('/login');
+    redirect('/entrar');
   }
 
   let response;
@@ -39,7 +39,7 @@ export default async function WorkoutDayPage({
     return (
       <ErrorContainer
         title="Ocorreu um erro ao carregar o treino."
-        backHref={`/workout-plan/${id}`}
+        backHref={`/plano-de-treino/${id}`}
         backLabel="Voltar para o plano"
       />
     );
@@ -53,7 +53,7 @@ export default async function WorkoutDayPage({
     return (
       <ErrorContainer
         title="Ocorreu um erro ao carregar o treino."
-        backHref={`/workout-plan/${id}`}
+        backHref={`/plano-de-treino/${id}`}
         backLabel="Voltar para o plano"
       />
     );
@@ -63,7 +63,7 @@ export default async function WorkoutDayPage({
     return (
       <ErrorContainer
         title="Você não tem permissão para acessar esta página."
-        backHref={`/workout-plan/${id}`}
+        backHref={`/plano-de-treino/${id}`}
         backLabel="Voltar para o plano"
       />
     );
@@ -73,7 +73,7 @@ export default async function WorkoutDayPage({
     return (
       <ErrorContainer
         title="Treino não encontrado."
-        backHref={`/workout-plan/${id}`}
+        backHref={`/plano-de-treino/${id}`}
         backLabel="Voltar para o plano"
       />
     );

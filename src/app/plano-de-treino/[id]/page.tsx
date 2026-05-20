@@ -61,7 +61,7 @@ export default async function WorkoutPlanPage({
   });
 
   if (!session.data) {
-    redirect('/login');
+    redirect('/entrar');
   }
 
   let response;
@@ -72,7 +72,7 @@ export default async function WorkoutPlanPage({
     return (
       <ErrorContainer
         title="Ocorreu um erro ao carregar o plano de treino."
-        backHref="/workout-plan"
+        backHref="/plano-de-treino"
         backLabel="Voltar para a lista"
       />
     );
@@ -82,7 +82,7 @@ export default async function WorkoutPlanPage({
     return (
       <ErrorContainer
         title="Ocorreu um erro ao carregar o plano de treino."
-        backHref="/workout-plan"
+        backHref="/plano-de-treino"
         backLabel="Voltar para a lista"
       />
     );

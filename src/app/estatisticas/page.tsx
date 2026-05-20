@@ -22,7 +22,7 @@ export default async function StatsPage() {
   });
 
   if (!session.data) {
-    redirect('/login');
+    redirect('/entrar');
   }
 
   // Calculate current year start and end dates for annual stats

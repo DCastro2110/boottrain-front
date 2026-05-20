@@ -38,7 +38,7 @@ export function WorkoutCard({ planId, dayId, workout }: IWorkoutCardProps) {
   const weekdayName = getFullWeekdayName(workout.date);
 
   return (
-    <Link href={`/workout-plan/${planId}/workout-day/${dayId}`}>
+    <Link href={`/plano-de-treino/${planId}/dia-de-treino/${dayId}`}>
       <div
         className="relative flex min-h-48 w-full flex-col justify-between rounded-xl bg-cover bg-center p-4 sm:min-h-52 sm:p-5"
         style={{

@@ -11,8 +11,8 @@ export default async function proxy(request: NextRequest) {
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
-    pathname.startsWith('/login') ||
-    pathname === '/onboarding' ||
+    pathname.startsWith('/entrar') ||
+    pathname === '/primeiros-passos' ||
     pathname === '/favicon.ico'
   ) {
     return NextResponse.next();
@@ -28,13 +28,13 @@ export default async function proxy(request: NextRequest) {
   });
 
   if (!session.data) {
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(new URL('/entrar', request.url));
   }
 
   const user = session.data.user;
 
   if (!user) {
-    return NextResponse.redirect(new URL('/login', request.url));
+    return NextResponse.redirect(new URL('/entrar', request.url));
   }
 
   const hasCompleteProfile =
@@ -44,7 +44,7 @@ export default async function proxy(request: NextRequest) {
     user.bodyFatPercentage !== null;
 
   if (!hasCompleteProfile) {
-    return NextResponse.redirect(new URL('/onboarding', request.url));
+    return NextResponse.redirect(new URL('/primeiros-passos', request.url));
   }
 
   return NextResponse.next();

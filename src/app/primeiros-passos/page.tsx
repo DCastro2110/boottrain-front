@@ -13,7 +13,7 @@ export default async function OnboardingPage() {
   });
 
   if (!session.data) {
-    redirect('/login');
+    redirect('/entrar');
   }
 
   return (

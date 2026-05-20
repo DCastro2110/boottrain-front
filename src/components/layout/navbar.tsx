@@ -19,7 +19,7 @@ export function Navbar() {
         </Link>
 
         <Link
-          href="/workout-plan"
+          href="/plano-de-treino"
           className="flex h-12 w-12 items-center justify-center text-[#999999]"
         >
           <Calendar className="h-6 w-6" />
@@ -33,7 +33,7 @@ export function Navbar() {
         </button>
 
         <Link
-          href="/stats"
+          href="/estatisticas"
           className="flex h-12 w-12 items-center justify-center text-[#999999]"
         >
           <BarChart3 className="h-6 w-6" />

@@ -40,7 +40,7 @@ export function TodayWorkout({ todayWorkoutDay }: ITodayWorkoutProps) {
         <span className="text-[18px] font-semibold text-black">
           Treino de Hoje
         </span>
-        <Link href="/treinos" className="text-[12px] text-[#2b54ff]">
+        <Link href="/plano-de-treino" className="text-[12px] text-[#2b54ff]">
           Ver treinos
         </Link>
       </div>

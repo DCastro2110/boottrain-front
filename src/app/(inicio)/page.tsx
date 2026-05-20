@@ -19,7 +19,7 @@ export default async function HomePage() {
   });
 
   if (!session.data) {
-    redirect('/login');
+    redirect('/entrar');
   }
 
   const homeData = await getHomeInfoData();

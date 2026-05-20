@@ -17,7 +17,7 @@ export default async function WorkoutPlansPage() {
   });
 
   if (!session.data) {
-    redirect('/login');
+    redirect('/entrar');
   }
 
   const plans = await getWorkoutPlanData();
@@ -44,7 +44,7 @@ export default async function WorkoutPlansPage() {
             {plans.map((plan) => (
               <Link
                 key={plan.id}
-                href={`/workout-plan/${plan.id}`}
+                href={`/plano-de-treino/${plan.id}`}
                 className="flex min-h-40 flex-col gap-3 rounded-xl border border-gray-100 bg-gray-50 p-4 transition-colors hover:bg-gray-100"
               >
                 <div className="flex items-center justify-between">
