@@ -99,7 +99,7 @@ export function ChatMessages({
   const lastUserMessage = messages.filter((m) => m.role === 'user').pop();
   const lastMessage = messages[messages.length - 1];
   const doesLastAssistantMessageHaveSomeText =
-    lastMessage.role === 'assistant' &&
+    lastMessage?.role === 'assistant' &&
     lastMessage.parts.some(
       (part) => part.type === 'text' && part.text.trim() !== '',
     );
@@ -128,7 +128,7 @@ export function ChatMessages({
           </div>
         );
       })}
-      {isLoading && doesLastAssistantMessageHaveSomeText && (
+      {isLoading && !doesLastAssistantMessageHaveSomeText && (
         <div className="flex items-center gap-2 px-4 py-3">
           <div className="h-2 w-2 rounded-full bg-gray-400 animate-bounce"></div>
           <div
