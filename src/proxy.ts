@@ -1,4 +1,4 @@
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
@@ -22,9 +22,7 @@ export default async function proxy(request: NextRequest) {
   try {
     const session = await authClient.getSession({
       fetchOptions: {
-        headers: {
-          cookie: (await cookies()).toString(),
-        },
+        headers: await headers(),
       },
     });
 
