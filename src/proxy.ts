@@ -19,35 +19,41 @@ export default async function proxy(request: NextRequest) {
   }
 
   // Get session using better-auth client
-  const session = await authClient.getSession({
-    fetchOptions: {
-      headers: {
-        cookie: (await cookies()).toString(),
+  try {
+    const session = await authClient.getSession({
+      fetchOptions: {
+        headers: {
+          cookie: (await cookies()).toString(),
+        },
       },
-    },
-  });
+    });
 
-  if (!session.data) {
+    if (!session.data) {
+      console.error('Error fetching session:', session);
+      return NextResponse.redirect(new URL('/entrar', request.url));
+    }
+    console.error('Error fetching session:', session);
+    const user = session.data.user;
+
+    if (!user) {
+      return NextResponse.redirect(new URL('/entrar', request.url));
+    }
+
+    const hasCompleteProfile =
+      user.height !== null &&
+      user.weight !== null &&
+      user.age !== null &&
+      user.bodyFatPercentage !== null;
+
+    if (!hasCompleteProfile) {
+      return NextResponse.redirect(new URL('/primeiros-passos', request.url));
+    }
+
+    return NextResponse.next();
+  } catch (error) {
+    console.error('Error fetching session:', error);
     return NextResponse.redirect(new URL('/entrar', request.url));
   }
-
-  const user = session.data.user;
-
-  if (!user) {
-    return NextResponse.redirect(new URL('/entrar', request.url));
-  }
-
-  const hasCompleteProfile =
-    user.height !== null &&
-    user.weight !== null &&
-    user.age !== null &&
-    user.bodyFatPercentage !== null;
-
-  if (!hasCompleteProfile) {
-    return NextResponse.redirect(new URL('/primeiros-passos', request.url));
-  }
-
-  return NextResponse.next();
 }
 
 export const config = {
