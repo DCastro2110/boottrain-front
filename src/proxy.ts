@@ -30,7 +30,6 @@ export default async function proxy(request: NextRequest) {
       console.error('Error fetching session:', session);
       return NextResponse.redirect(new URL('/entrar', request.url));
     }
-    console.error('Error fetching session:', session);
     const user = session.data.user;
 
     if (!user) {
