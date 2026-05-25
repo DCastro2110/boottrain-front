@@ -59,8 +59,8 @@ export default async function ProfilePage() {
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <StatCard icon={Scale} value={profile.weight} unit="Kg" />
-            <StatCard icon={Ruler} value={profile.height} unit="Cm" />
+            <StatCard icon={Scale} value={profile.weight / 1000} unit="Kg" />
+            <StatCard icon={Ruler} value={profile.height / 100} unit="m" />
             <StatCard icon={BicepsFlexed} value={profile.bodyFat} unit="Gc" />
             <StatCard icon={User} value={profile.age} unit="Anos" />
           </div>
